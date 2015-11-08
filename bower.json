@@ -1,0 +1,12 @@
+{
+  "name": "foundationpress",
+  "main": [
+    "assets/stylesheets/foundation.css",
+    "assets/javascript/foundation.js"
+  ],
+  "ignore": [],
+  "dependencies": {
+    "foundation-sites": "zurb/foundation-sites-6",
+    "fontawesome": "~4.4.0"
+  }
+}

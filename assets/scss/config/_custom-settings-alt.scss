@@ -1,0 +1,180 @@
+/*
+	My custom settings. These variables are copied from _settings.css
+	This file will only contain uncommented settings that are actually used in the theme.
+*/
+
+// We use these to define default font stacks
+$font-family-sans-serif: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+$font-family-serif: Georgia, Cambria, "Times New Roman", Times, serif;
+$font-family-monospace: Consolas, "Liberation Mono", Courier, monospace;
+
+// We use these to define default font weights
+$font-weight-normal: normal !default;
+$font-weight-bold: bold !default;
+
+// Foundation color naming conventions
+$white       : #FFFFFF;
+$ghost       : #FAFAFA;
+$snow        : #F9F9F9;
+$vapor       : #F6F6F6;
+$white-smoke : #F5F5F5;
+$silver      : #EFEFEF;
+$smoke       : #EEEEEE;
+$gainsboro   : #DDDDDD;
+$iron        : #CCCCCC;
+$base        : #AAAAAA;
+$aluminum    : #999999;
+$jumbo       : #888888;
+$monsoon     : #777777;
+$steel       : #666666;
+$charcoal    : #555555;
+$tuatara     : #444444;
+$oil         : #333333;
+$jet         : #222222;
+$black       : #000000;
+
+// We use these as default colors throughout
+$primary-color: darkgrey;
+$secondary-color: #e7e7e7;
+$alert-color: #f04124;
+$success-color: #43AC6A;
+$warning-color: #f08a24;
+$info-color: #a0d3e8;
+
+// We use these to control various global styles
+$body-bg: $white;
+$body-font-color: $jet;
+$body-font-family: $font-family-sans-serif;
+$body-font-weight: $font-weight-normal;
+$body-font-style: normal;
+$header-font-weight: 300;
+$header-text-rendering: optimizeLegibility;
+
+// Set the link colors and styles for top-level nav
+$topbar-link-weight: bold;
+$topbar-link-color: $white;
+$topbar-link-color-hover: $white;
+$topbar-link-color-active: $white;
+$topbar-link-color-active-hover: $white;
+
+//$topbar-link-bg: $topbar-bg;
+$topbar-link-bg-hover: $jet;
+$topbar-link-bg-color-hover: $jet;
+$topbar-link-bg-active: $jet;
+$topbar-link-bg-active-hover: scale-color($jet, $lightness: -14%);
+
+// Media query breakpoints
+$small-breakpoint:  em-calc(640);
+$medium-breakpoint: em-calc(1024);
+$topbar-breakpoint: em-calc(820);
+$large-breakpoint:  em-calc(1440);
+$xlarge-breakpoint: em-calc(1920);
+
+
+
+// b. Grid
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-grid-classes: $include-html-classes;
+// $include-xl-html-grid-classes: false;
+
+$row-width: rem-calc(600);
+// $total-columns: 12;
+$column-gutter: rem-calc(15);
+
+
+
+// 05. Buttons
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-button-classes: $include-html-classes;
+
+// We use these to build padding for buttons.
+$button-tny: rem-calc(5);
+// $button-sml: rem-calc(14);
+// $button-med: rem-calc(16);
+// $button-lrg: rem-calc(18);
+
+// We use this to control the display property.
+// $button-display: inline-block;
+$button-margin-bottom: rem-calc(5);
+
+// We use these to control button text styles.
+// $button-font-family: $body-font-family;
+// $button-font-color: $white;
+// $button-font-color-alt: $oil;
+// $button-font-tny: rem-calc(11);
+// $button-font-sml: rem-calc(13);
+// $button-font-med: rem-calc(16);
+// $button-font-lrg: rem-calc(20);
+// $button-font-weight: $font-weight-normal;
+// $button-font-align: center;
+
+// We use these to control various hover effects.
+// $button-function-factor: -20%;
+
+// We use these to control button border styles.
+// $button-border-width: 0;
+// $button-border-style: solid;
+// $button-bg-color: $primary-color;
+// $button-bg-hover: scale-color($button-bg-color, $lightness: $button-function-factor);
+// $button-border-color: $button-bg-hover;
+// $secondary-button-bg-hover: scale-color($secondary-color, $lightness: $button-function-factor);
+// $secondary-button-border-color: $secondary-button-bg-hover;
+// $success-button-bg-hover: scale-color($success-color, $lightness: $button-function-factor);
+// $success-button-border-color: $success-button-bg-hover;
+// $alert-button-bg-hover: scale-color($alert-color, $lightness: $button-function-factor);
+// $alert-button-border-color: $alert-button-bg-hover;
+// $warning-button-bg-hover: scale-color($warning-color, $lightness: $button-function-factor);
+// $warning-button-border-color: $warning-button-bg-hover;
+// $info-button-bg-hover: scale-color($info-color, $lightness: $button-function-factor);
+// $info-button-border-color: $info-button-bg-hover;
+
+// We use this to set the default radius used throughout the core.
+// $button-radius: $global-radius;
+// $button-round: $global-rounded;
+
+// We use this to set default opacity and cursor for disabled buttons.
+// $button-disabled-opacity: .7;
+// $button-disabled-cursor: $cursor-default-value;
+
+
+
+// 09. Dropdown Buttons
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// $include-html-button-classes: $include-html-classes;
+
+// We use these to set the color of the pip in dropdown buttons
+// $dropdown-button-pip-color: $white;
+// $dropdown-button-pip-color-alt: $oil;
+
+// We use these to set the size of the pip in dropdown buttons
+$button-pip-tny: rem-calc(6);
+// $button-pip-sml: rem-calc(7);
+// $button-pip-med: rem-calc(9);
+// $button-pip-lrg: rem-calc(11);
+
+// We use these to style tiny dropdown buttons
+$dropdown-button-padding-tny: $button-pip-tny * 7;
+// $dropdown-button-pip-size-tny: $button-pip-tny;
+// $dropdown-button-pip-opposite-tny: $button-pip-tny * 3;
+// $dropdown-button-pip-top-tny: (-$button-pip-tny / 2) + rem-calc(1);
+
+// We use these to style small dropdown buttons
+// $dropdown-button-padding-sml: $button-pip-sml * 7;
+// $dropdown-button-pip-size-sml: $button-pip-sml;
+// $dropdown-button-pip-opposite-sml: $button-pip-sml * 3;
+// $dropdown-button-pip-top-sml: (-$button-pip-sml / 2) + rem-calc(1);
+
+// We use these to style medium dropdown buttons
+// $dropdown-button-padding-med: $button-pip-med * 6 + rem-calc(3);
+// $dropdown-button-pip-size-med: $button-pip-med - rem-calc(3);
+// $dropdown-button-pip-opposite-med: $button-pip-med * 2.5;
+// $dropdown-button-pip-top-med: (-$button-pip-med / 2) + rem-calc(2);
+
+// We use these to style large dropdown buttons
+// $dropdown-button-padding-lrg: $button-pip-lrg * 5 + rem-calc(3);
+// $dropdown-button-pip-size-lrg: $button-pip-lrg - rem-calc(6);
+// $dropdown-button-pip-opposite-lrg: $button-pip-lrg * 2.5;
+// $dropdown-button-pip-top-lrg: (-$button-pip-lrg / 2) + rem-calc(3);
