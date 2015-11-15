@@ -1,3 +1,24 @@
 .gearlist td:nth-child(4) {
     width: rem-calc(75px);
 }
+
+
+.filter-section{
+	margin-bottom: $column-gutter;
+}
+
+.label{
+	margin-bottom: rem-calc(5);
+}
+
+.page-template-gearpool{
+	h3{
+		font-size: rem-calc(18);
+		font-weight: bold;
+	}
+}
+
+.tabs-content{
+	background: #ddd;
+	padding: 5px 20px;
+}

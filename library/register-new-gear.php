@@ -7,9 +7,12 @@ function registerNewGear(){
 	//
 	if (isset($_GET["newitem"])) {
 		$NewItem = $_GET["newitem"];
-		$gearItemName = $_GET["gearitemname"];
-		$gearItemWeight = $_GET["gearitemweight"];
-		$gearItemType = $_GET["gearitemtype"];
+		$gearItemName = $_GET["gearitemname"]; 		// Item Name
+		$gearItemWeight = $_GET["gearitemweight"];	// Item Weight
+		$gearItemType = $_GET["gearitemtype"];		// Item Type
+		$gearItemBrand = $_GET["gearitembrand"];	// Item Brand
+
+
 
 		if ($NewItem != '') {
 			$my_post = array(
@@ -17,12 +20,29 @@ function registerNewGear(){
 			  'post_type' => 'gear',
 			  'post_status'   => 'publish',
 			  'post_author'   => get_current_user_id(),
-			  'tax_input'	  => array('geartype' => $gearItemType)
+			  'tax_input'	  => array('geartype' => $gearItemType, 'brand' => $gearItemBrand)
 			);
 
 			// Insert the post into the database
 			$new_post_id = wp_insert_post( $my_post );
 			add_post_meta($new_post_id, 'gearlist_weight', $gearItemWeight, false);
+
+			if (isset($_GET["newitemparent"])) {
+				add_post_meta($new_post_id, 'parent_gear', $_GET["newitemparent"], true);
+			}
+			if (isset($_GET["gearpool"])) {
+				add_post_meta($new_post_id, 'gearpool', true, true);
+			}
+
+			if ( is_singular( 'gear' ) ) {
+				$newItemUrl = get_the_permalink($new_post_id);
+				echo '<script type="text/javascript">
+				<!--
+				window.location = "' . $newItemUrl . '?alertMessage=Ihr Neues Element wurde erfolgreich erstellt&alertMessageType=success";
+				//–>
+				</script>';
+				exit();
+			}
 		}
 	}
 
@@ -43,9 +63,12 @@ function registerNewGear(){
 			// Insert the post into the database
 			$new_post_id = wp_insert_post( $my_post );
 		}
+		addSublist($new_post_id, 'Körper', ''); //Automaticly register new Sublist
 	}
 
-	//Delete Post Or Gear
+
+
+	//Delete Gear
 	if (isset($_GET["deletepost"])) {
 		$deltePost = $_GET["deletepost"];
 		$deletePostId = $_GET["deletepostid"];
@@ -54,17 +77,71 @@ function registerNewGear(){
 		}
 	}
 
+	//Delete Post
+	if (isset($_GET["deletegearlist"])) {
+		$deleteGearlist = $_GET["deletegearlist"];
+		$sublistsToDelete = get_post_meta( $deleteGearlist, 'sublists', false);
+		foreach ($sublistsToDelete as $sublistToDelete) {
+			wp_delete_post($sublistToDelete);
+		}
+		wp_delete_post($deleteGearlist);
+	}
+
+
 
 	//
 	// New Geartype Taxonomie
 	//
-	if (isset($_GET["newgeartype"])) {
-		$newGearType = $_GET["newgeartype"];
-		$newGearTypeName = $_GET["geartypename"];
-		if ($newGearType != '') {
-			wp_insert_term($newGearTypeName, 'geartype');
+	if (isset($_GET["newbrand"])) {
+		$newBrand = $_GET["newbrand"];
+		if ($newBrand != '') {
+			wp_insert_term($newBrand, 'brand');
 		}
 	}
 }
 
 add_action('wp_head', 'registerNewGear');
+
+
+
+
+
+function registerNewGearForm( $permalinkmain ){
+	?>
+	<strong>Neues Gepäckstück erstellen:</strong>
+		<form action="<?php $permalinkmain ?>" method="get">
+			<input type="text" name="gearitemname" placeholder="Name" required>
+			<input type="number" name="gearitemweight" placeholder="Gewicht in Gramm" required>
+			<select name="gearitembrand" id="gearitembrand" required>
+				<option value="" disabled selected>Hersteller auswählen</option>
+				<?php 
+				$brands = get_terms( 'brand', 'orderby=name&hide_empty=0' );
+					foreach ($brands as $brand) {
+						echo '<option value="' . $brand->slug . '">' . $brand->name . '</option>';
+					}
+				?>
+				<option value="other">Anderer Hersteller</option>
+			</select>
+			<input type="hidden" name="newitem" value="newitem">
+			<select name="gearitemtype" id="gearitemtype" required>
+				<option value="">Kategorie auswählen</option>
+				<?php 
+				$geartype = get_terms( 'geartype', 'orderby=name&hide_empty=0' );
+					foreach ($geartype as $geartypesingle) {
+						echo '<option value="' . $geartypesingle->slug . '">' . $geartypesingle->name . '</option>';
+					}
+				?>
+			</select>
+			<div class="row">
+				<div class="switch round columns small-3" style="margin-left:10px">
+				  <input id="gearpool_checkbox" type="checkbox" name="gearpool" checked>
+				  <label for="gearpool_checkbox"></label>
+				</div>
+				<div class="columns small-8 end">
+					Im Gearpool veröffentlichen.
+				</div>
+			</div>
+			<button class="button" type="submit">Erstellen</button>
+		</form>
+		<?
+}

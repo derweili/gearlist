@@ -120,6 +120,7 @@ module.exports = function (grunt) {
 					'assets/components/foundation/js/foundation/foundation.topbar.js',
 
 					// Include your own custom scripts (located in the custom folder)
+
 					'assets/javascript/custom/*.js'
 
 				],

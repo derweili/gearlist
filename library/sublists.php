@@ -2,40 +2,119 @@
 
 function sublistTable($post_ID, $sublist, $permalinkmain, $allsublists){
 
-$gearitems = get_post_meta( get_the_ID(), $sublist );
-$gesamtgewicht = 0;
+$gearitems = get_post_meta( $sublist, 'items' );
+
+if (get_post_meta( $sublist, 'baseweight' ) != '') {
+	$gesamtgewicht = get_post_meta( $sublist, 'baseweight' );
+	$gesamtgewicht = $gesamtgewicht[0];
+}else{
+	$gesamtgewicht = 0;
+}
 ?>
-<h3><?php echo $sublist; ?><a href="<?php echo $permalinkmain . '?removesublist=' . $sublist; ?>" class="hide-for-print"><i class="fa fa-times" style="float:right;"></i></a></h3>
+
 <?php 
+
+//Headline
+$output = '<h3 class="">' . get_the_title($sublist);
+if (get_the_title() != 'Körper') {
+	$output .= '<a href="' . $permalinkmain . '?removesublist=' . $sublist . '" class="hide-for-print"><i class="fa fa-trash-o" style="float:right;"></i></a>';
+}
+
+$output .= '<span style="">';
+if(get_post_meta( $sublist, 'baseweight', true ) != ''){ 
+	$output .= ' – ' . get_post_meta( $sublist, 'baseweight', true ) . 'g'; 
+}
+$output .= '</span></h3>';
+
+
+
 if ( !empty($gearitems) ):
  ?>
 <table style="width: 100%;">
 <?php
+		
+	$output .= "<tr><th>#</th><th>Name</th><th></th><th>Kategorie</th><th>Umpacken</th><th>Gewicht</th><th>Gesamt</th><th></th></tr>";
+
+$bodyWeight = 0; $consumerGoodsWeight = 0; $equipmentWeight = $gesamtgewicht;
+
 	foreach ($gearitems as $value):
 		$einzelgewicht = get_post_meta( $value, 'gearlist_weight', true);
+		$itemCount = get_post_meta( $sublist, $value . '-count', true);
+		$itemWeight = get_post_meta( $value, 'gearlist_weight', true);
+		$itemWeightSubtotal = $itemCount * $itemWeight;
+		$itemType = wp_get_post_terms( $value, 'geartype');
+
+		//for the statistic
+		
+
+		if (get_the_title($sublist) == 'Körper') {
+
+			$bodyWeight = $bodyWeight + $itemWeightSubtotal;
+
+		}else{
+
+			if ($itemType[0]->slug == 'verbrauchsgueter') {
+				$consumerGoodsWeight =  $consumerGoodsWeight + $itemWeightSubtotal;
+			}else{
+				$equipmentWeight = $equipmentWeight + $itemWeightSubtotal;
+			}
+
+		}
+
+
 		$row = '';
 		$row .= '<tr>';
+		$row = '<td>' . $itemCount . '</td>';
 		$row .= '<td>' . get_the_title( $value ) . '</td>';
-		$row .= '<td>'. drag_dropdown($post_ID, $value, $allsublists, $sublist, $permalinkmain) .'</td>';
-		$row .= '<td style="text-align:right">' . get_post_meta( $value, 'gearlist_weight', true) . 'g</td>';
-		$row .= '<td class="hide-for-print"><a href="' . $permalinkmain . '?removegear=' . $value . '&removegearsublist=' . $sublist . '">';
-		$row .= '<span class="round alert label">löschen</span></a></td>';
+		$row .= '<td class="hide-for-print" style="width:50px"><a href="' . $permalinkmain . '?increasegear=' . $value . '&increasegearsublist=' . $sublist . '"><i class="fa fa-plus"></i></a> <a href="' . $permalinkmain . '?reducegear=' . $value . '&reducegearsublist=' . $sublist . '"><i class="fa fa-minus"></i></a></td>'; // Geartype Name
+		$row .= '<td>' . $itemType[0]->name . '</td>'; // Geartype Name
+		$row .= '<td>'. drag_dropdown($post_ID, $value, $allsublists, $sublist, $permalinkmain, $itemCount) .'</td>';
+		$row .= '<td style="text-align:right">' . $itemWeight . 'g</td>'; // Item Weight
+		$row .= '<td style="text-align:right">' . $itemWeightSubtotal . 'g</td>'; // Item Weight Subtotal (Weight * Count)
+		$row .= '<td class="hide-for-print" style="width: 13px"><a href="' . $permalinkmain . '?removegear=' . $value . '&removegearsublist=' . $sublist . '">'; //Remove Item
+		$row .= '<i class="fa fa-trash-o"></i></a></td>';
 		$row .= '</tr>';
-		echo $row;
-		$gesamtgewicht = $gesamtgewicht + $einzelgewicht;
-	endforeach;
-	?>
-	<tr>
-		<td><strong>Gesamt</strong></td>
-		<td></td><!-- Platzhalter für "Verschieben" Button, den es in der Gesamt Zeile nicht gibt -->
-		<td style="text-align:right"><strong><?php echo $gesamtgewicht; ?>g</strong></td>
-		<td class="hide-for-print"></td>
-	</tr>
-	</table>
-<?php 
+		
+		$output .= $row;
+		
+		$gesamtgewicht = $gesamtgewicht + $itemWeightSubtotal;
+
+		endforeach;
+		
+	$output .=	'<tr>';
+	$output .=	'<td></td>';
+	$output .=	'<td><strong>Gesamt</strong></td>';
+	$output .=	'<td></td>';
+	$output .=	'<td></td><!-- Platzhalter für "Verschieben" Button, den es in der Gesamt Zeile nicht gibt -->';
+	$output .=	'<td></td>';
+	$output .=	'<td></td>';
+	$output .=	'<td style="text-align:right"><strong>' . $gesamtgewicht . 'g</strong></td>';
+	$output .=	'<td class="hide-for-print"></td>';
+	$output .=	'</tr>';
+	$output .=	'</table>';
+
 else:
-	echo $sublist . ' wurden noch keine Elemente zugewießen<br /><br />';
-endif; 
+	$output.= get_the_title( $sublist ) . ' wurden noch keine Elemente zugewießen<br /><br />';
+endif;
+
+if (!isset($consumerGoodsWeight)) {
+	$consumerGoodsWeight = null;
+}
+if (!isset($bodyWeight)) {
+	$bodyWeight = null;
+}
+if (!isset($equipmentWeight)) {
+	$equipmentWeight = null;
+}
+
+$output = [
+	'html' => $output,
+	'consumerGoodsWeight' => $consumerGoodsWeight,
+	'bodyWeight' => $bodyWeight,
+	'equipmentWeight' => $equipmentWeight,
+	'totalWeight' => $gesamtgewicht,
+];
+return $output;
 
 }
 
@@ -43,7 +122,7 @@ endif;
 
 
 
-function drag_dropdown($post_ID, $item_ID, $allsublists, $current_sublist, $permalinkmain){ //Verschieben Funktion zwischen Sublists
+function drag_dropdown($post_ID, $item_ID, $allsublists, $current_sublist, $permalinkmain, $itemCount){ //Verschieben Funktion zwischen Sublists
 /*
 	Funktionserklärung:
 	Schritt 1: Element wird aus aktueller Liste Gelöscht
@@ -51,13 +130,13 @@ function drag_dropdown($post_ID, $item_ID, $allsublists, $current_sublist, $perm
 */
 
 	$output = '';
-	$output .= '<button href="#" data-dropdown="drop-drag-' . $item_ID . '" aria-controls="drop-drag-' . $item_ID . '" aria-expanded="false" class="button tiny dropdown">Verschieben</button><br>';
+	$output .= '<button href="#" data-dropdown="drop-drag-' . $item_ID . '" aria-controls="drop-drag-' . $item_ID . '" aria-expanded="false" class="button tiny dropdown">Umpacken</button><br>';
 	$output .= '<ul id="drop-drag-' . $item_ID . '" data-dropdown-content class="f-dropdown" aria-hidden="true">';
 
 	foreach ($allsublists as $value){
 		if ($value != $current_sublist) {
-			$output .= '<li><a href="' . $permalinkmain . '?removegear=' . $item_ID . '&removegearsublist=' . $current_sublist . '&addgear=' . $item_ID . '&sublist=' . $value . '">';
-			$output .= $value;
+			$output .= '<li><a href="' . $permalinkmain . '?removegear=' . $item_ID . '&removegearsublist=' . $current_sublist . '&addgear=' . $item_ID . '&addgearsublist=' . $value . '&addgearcount=' . $itemCount . '">';
+			$output .= get_the_title($value);
 			$output .= '</a></li>';
 		}
 

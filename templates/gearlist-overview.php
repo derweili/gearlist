@@ -6,14 +6,15 @@ get_header();
 $permalinkmain = get_permalink();
 ?>
 <div class="row">
-	<div class="small-12 columns" role="main">
+	<header class="columns small-12">
+		<h1><?php the_title(); ?></h1>
+	</header>
+	<div class="small-12 medium-8 columns" role="main">
 
 	<?php /* Start loop */ ?>
 	<?php while ( have_posts() ) : the_post(); ?>
 		<article <?php post_class() ?> id="post-<?php the_ID(); ?>">
-			<header>
-				<h1><?php the_title(); ?></h1>
-			</header>
+
 			<div>
 				<?php the_content(); ?>
 			</div>
@@ -39,7 +40,7 @@ $permalinkmain = get_permalink();
 									<?php //foundationpress_entry_meta(); ?>
 								</header>
 								<div >
-									<a href="<?php echo $permalinkmain . '?deletepost=deletepost&deletepostid=' . get_the_ID(); ?>"><span class="round alert label">löschen</span></a>
+									<a href="<?php echo $permalinkmain . '?deletegearlist=' . get_the_ID(); ?>"><span class="round alert label">löschen</span></a>
 									<?php the_content( __( 'Continue reading...', 'foundationpress' ) ); ?>
 								</div>
 								<footer>
@@ -59,7 +60,7 @@ $permalinkmain = get_permalink();
 		</article>
 	<?php endwhile; ?>
 	</div>
-	<div class="columns small-12">
+	<div class="columns small-12 medium-4">
 		<strong>Neue Packliste erstellen:</strong>
 		<form action="<?php get_permalink() ?>" method="get">
 			<input type="text" name="gearlistname" placeholder="Name">

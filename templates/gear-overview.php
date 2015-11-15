@@ -6,14 +6,15 @@ get_header();
 $permalinkmain = get_permalink();
 ?>
 <div class="row">
-	<div class="small-12 columns" role="main">
+	<header class="columns small-12">
+		<h1><?php the_title(); ?></h1>
+	</header>
+	<div class="small-12 medium-8 columns" role="main">
 
 	<?php /* Start loop */ ?>
 	<?php while ( have_posts() ) : the_post(); ?>
 		<article <?php post_class() ?> id="post-<?php the_ID(); ?>">
-			<header>
-				<h1><?php the_title(); ?></h1>
-			</header>
+
 			<div>
 				<?php the_content(); ?>
 			</div>
@@ -32,18 +33,24 @@ $permalinkmain = get_permalink();
 					if(!empty($posts)):
 
 					foreach( $posts as $post ): setup_postdata( $post );
+					if ( wp_get_post_terms( get_the_ID(), 'brand') !== null) {
+						$brands = wp_get_post_terms( get_the_ID(), 'brand');
+					}
+
 						?>
 							<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-								<header>
-									<h3><?php the_title(); ?></h3>
-									<?php //foundationpress_entry_meta(); ?>
-								</header>
-								<div >
-									Gewicht: <?php echo get_post_meta( get_the_ID(), 'gearlist_weight', true); ?>g <a href="<?php echo $permalinkmain . '?deletepost=deletepost&deletepostid=' . get_the_ID(); ?>"><span class="round alert label">löschen</span></a>
-									<?php the_content( __( 'Continue reading...', 'foundationpress' ) ); ?>
-								</div>
-								<footer>
-								</footer>
+								
+									<header>
+										<h3><?php if( isset($brands[0]) ){ echo $brands[0]->name . ' – '; };?><a href="<?php echo get_the_permalink(); ?>"><?php the_title(); ?></a></h3>
+										<?php //foundationpress_entry_meta(); ?>
+									</header>
+									<div >
+										Gewicht: <?php echo get_post_meta( get_the_ID(), 'gearlist_weight', true); ?>g <a href="<?php echo $permalinkmain . '?deletepost=deletepost&deletepostid=' . get_the_ID(); ?>"><span class="round alert label">löschen</span></a>
+										<?php the_content( __( 'Continue reading...', 'foundationpress' ) ); ?>
+									</div>
+									<footer>
+									</footer>
+
 								<hr />
 							</article>
 
@@ -59,31 +66,20 @@ $permalinkmain = get_permalink();
 		</article>
 	<?php endwhile; ?>
 	</div>
-	<div class="columns small-12">
-		<strong>Neues Gepäckstück erstellen:</strong>
-		<form action="<?php $permalinkmain ?>" method="get">
-				<input type="text" name="gearitemname" placeholder="Name">
-				<input type="number" name="gearitemweight" placeholder="Gewicht in Gramm">
-				<input type="hidden" name="newitem" value="newitem">
-				<select name="gearitemtype" id="gearitemtype">
-					<option value="" disabled selected>Kategorie auswählen</option>
-					<?php 
-					$geartype = get_terms( 'geartype', 'orderby=count&hide_empty=0' );
-						foreach ($geartype as $geartypesingle) {
-							echo '<option value="' . $geartypesingle->slug . '">' . $geartypesingle->name . '</option>';
-						}
-					?>
-				</select>
-				<button class="button" type="submit">Erstellen</button>
-			</form>
+	<div class="columns small-12 medium-4">
+		<?php registerNewGearForm( $permalinkmain ); ?>
 	</div>
-	<div class="columns small-12">
-		<strong>Neue Gepäckkategorie erstellen:</strong>
-		<form action="<?php $permalinkmain ?>" method="get">
-				<input type="text" name="geartypename" placeholder="Name">
-				<input type="hidden" name="newgeartype" value="newgeartype">
-				<button class="button" type="submit">Erstellen</button>
-			</form>
-	</div>
+	
+	<!-- Der Nutzer bekommt nicht die Möglichkeit Gepäckkategorien zu erstellen --> 
+	<!--
+		<div class="columns small-12">
+			<strong>Neue Gepäckkategorie erstellen:</strong>
+			<form action="<?php $permalinkmain ?>" method="get">
+					<input type="text" name="geartypename" placeholder="Name">
+					<input type="hidden" name="newgeartype" value="newgeartype">
+					<button class="button" type="submit">Erstellen</button>
+				</form>
+		</div>
+	-->
 </div>
 <?php get_footer(); ?>

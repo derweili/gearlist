@@ -66,4 +66,10 @@ require_once( 'library/add-remove-sublist.php' );
 /** sublists table */
 require_once( 'library/sublists.php' );
 
+/** Alert Boxes */
+require_once( 'library/alert-boxes.php' );
+
+/** force login */
+require_once( 'library/force-login.php' );
+
 ?>

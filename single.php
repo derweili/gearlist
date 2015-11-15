@@ -6,7 +6,6 @@
  * @subpackage FoundationPress
  * @since FoundationPress 1.0.0
  */
-add_post_meta(get_the_ID(), 'test', 'testvalue', false);
 
 get_header(); ?>
 
