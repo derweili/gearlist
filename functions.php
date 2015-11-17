@@ -75,4 +75,7 @@ require_once( 'library/alert-boxes.php' );
 /** force login */
 require_once( 'library/force-login.php' );
 
+/** Gearlist general functions */
+require_once( 'library/gearlist-basic-functions.php' );
+
 ?>
