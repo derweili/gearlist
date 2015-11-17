@@ -33,6 +33,9 @@ function registerNewGear(){
 			if (isset($_GET["gearpool"])) {
 				add_post_meta($new_post_id, 'gearpool', true, true);
 			}
+			if (isset($_GET["gearitemsize"])) {
+				add_post_meta($new_post_id, 'item_size', $_GET["gearitemsize"], true);
+			}
 
 			if ( is_singular( 'gear' ) ) {
 				$newItemUrl = get_the_permalink($new_post_id);
@@ -108,10 +111,8 @@ add_action('wp_head', 'registerNewGear');
 
 function registerNewGearForm( $permalinkmain ){
 	?>
-	<strong>Neues Gepäckstück erstellen:</strong>
+	<strong>Neue Ausrüstung erstellen:</strong>
 		<form action="<?php $permalinkmain ?>" method="get">
-			<input type="text" name="gearitemname" placeholder="Name" required>
-			<input type="number" name="gearitemweight" placeholder="Gewicht in Gramm" required>
 			<select name="gearitembrand" id="gearitembrand" required>
 				<option value="" disabled selected>Hersteller auswählen</option>
 				<?php 
@@ -122,6 +123,10 @@ function registerNewGearForm( $permalinkmain ){
 				?>
 				<option value="other">Anderer Hersteller</option>
 			</select>
+			<input type="text" name="gearitemname" placeholder="Name" required>
+			<input type="text" name="gearitemsize" placeholder="Größe" required>
+			<input type="number" name="gearitemweight" placeholder="Gewicht in Gramm" required>
+			
 			<input type="hidden" name="newitem" value="newitem">
 			<select name="gearitemtype" id="gearitemtype" required>
 				<option value="">Kategorie auswählen</option>

@@ -20,7 +20,7 @@ $idmain = get_the_ID();
 ?>
 
 <div class="row">
-	<div class="small-12 medium-7 large-8 columns" role="main">
+	<div class="small-12 medium-9 large-8 columns" role="main">
 
 	<?php do_action( 'foundationpress_before_content' ); ?>
 

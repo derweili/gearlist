@@ -20,13 +20,13 @@ function allGearByType($permalinkmain, $geartype, $allsublists){
 		foreach( $posts as $post ): setup_postdata( $post );
 
 		?>
-			<button href="#" data-dropdown="drop<?php echo get_the_ID(); ?>" aria-controls="drop<?php echo get_the_ID(); ?>" aria-expanded="false" class="button tiny dropdown"><?php the_title(); ?></button><br>
+			<button href="#" data-dropdown="drop<?php echo get_the_ID(); ?>" aria-controls="drop<?php echo get_the_ID(); ?>" aria-expanded="false" class="button tiny dropdown"><?php the_title(); ?> - <?php echo get_post_meta( get_the_ID(), 'item_size', true); ?></button><br>
 			<ul id="drop<?php echo get_the_ID(); ?>" data-dropdown-content class="f-dropdown" aria-hidden="true">
 				<?php foreach ($allsublists as $value): ?>
 					<li><a href="<?php echo $permalinkmain ?>?addgear=<?php echo get_the_ID(); ?>&addgearsublist=<?php echo $value; ?>"><?php echo get_the_title($value); ?></a></li>
 				<?php endforeach ?>
 				<?php if ($geartype == 'transport'): ?>
-					<li><a href="<?php echo $permalinkmain ?>?newsublist=<?php echo get_the_title(); ?>&baseweight=<?php echo get_post_meta( get_the_ID(), 'gearlist_weight', true); ?>">Neue untergeordnete Liste erstellen</a></li>
+					<li><a href="<?php echo $permalinkmain ?>?newsublist=<?php echo get_the_title(); ?> <?php echo get_post_meta( get_the_ID(), 'item_size', true); ?>&baseweight=<?php echo get_post_meta( get_the_ID(), 'gearlist_weight', true); ?>">Neue untergeordnete Liste erstellen</a></li>
 				<?php endif ?>
 				<li style=""><a href="<?php echo $permalinkmain ?>?deletepost=deletepost&deletepostid=<?php echo get_the_ID(); ?>" style="color:lightgrey;"><?php the_title(); ?> löschen</a></li>
 			</ul>

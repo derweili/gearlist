@@ -5,10 +5,18 @@
 
 .filter-section{
 	margin-bottom: $column-gutter;
+
 }
 
 .label{
 	margin-bottom: rem-calc(5);
+		cursor: pointer;
+
+}
+
+.filteritem.active{
+	background: white;
+	color:grey;
 }
 
 .page-template-gearpool{
@@ -21,4 +29,17 @@
 .tabs-content{
 	background: #ddd;
 	padding: 5px 20px;
+}
+
+
+.singlegearitem{
+	margin-bottom: $column-gutter;
+}
+
+.sublistcontainer{
+	width: 100%;
+	overflow-x: scroll;
+	.table{
+		min-width: rem-calc(590);
+	}
 }

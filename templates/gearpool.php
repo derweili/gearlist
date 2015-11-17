@@ -6,9 +6,25 @@ get_header();
 $permalinkmain = get_permalink();
 ?>
 <div class="row">
+	<div class="columns small-12 medium-4 show-for-small">
+		<?php registerNewGearForm( $permalinkmain ); ?>
+
+
+		<div style="margin-top:20px">
+			<strong>Neuer Hersteller hinzufügen:</strong>
+			<form action="<?php $permalinkmain ?>" method="get">
+				<input type="text" name="newbrand" placeholder="Hersteller">
+				<button class="button" type="submit">Hinzufügen</button>
+			</form>
+		</div>
+	</div>
+
+	
 	<header class="columns small-12">
 		<h1><?php the_title(); ?></h1>
 	</header>
+
+
 
 
 	<div class="small-12 medium-8 columns" role="main">
@@ -28,7 +44,7 @@ Filter
 			<?php 
 				$geartype = get_terms( 'geartype', 'orderby=name&hide_empty=0' );
 					foreach ($geartype as $geartypesingle) {
-						echo '<span class="label">' . $geartypesingle->name . '</span> ';
+						echo '<span class="label filteritem ' . $geartypesingle->slug . '" data-filter="geartype-' . $geartypesingle->slug . '">' . $geartypesingle->name . '</span> ';
 				}
 			?>
 		  </div>
@@ -36,7 +52,7 @@ Filter
 			<?php 
 				$geartype = get_terms( 'brand', 'orderby=name&hide_empty=0' );
 				foreach ($geartype as $geartypesingle) {
-					echo '<span class="label">' . $geartypesingle->name . '</span> ';
+					echo '<span class="label filteritem ' . $geartypesingle->slug . '" data-filter="brand-' . $geartypesingle->slug . '">' . $geartypesingle->name . '</span> ';
 			};
 			?>
 		  </div>
@@ -76,20 +92,23 @@ Loop
 
 
 						?>
-							<div id="post-<?php the_ID(); ?>" <?php post_class('columns small-6 medium-4'); ?> >
+							<div data-mh="my-group" id="post-<?php the_ID(); ?>" <?php post_class('columns small-12 medium-6 singlegearitem'); ?> data-mh="singlegearitem">
 								<div class="panel" data-equalizer-watch>
-									<header>
-										<h3><a href="<?php echo get_the_permalink(); ?>"><?php the_title(); ?></a></h3>
-										<?php //foundationpress_entry_meta(); ?>
-									</header>
-									<div>
-										<?php if( isset($brands[0]) ){ echo 'Marke: ' . $brands[0]->name . '<br />'; };?>
-										Gewicht: <?php echo get_post_meta( get_the_ID(), 'gearlist_weight', true); ?>g 
-										<!--<a href="<?php echo $permalinkmain . '?deletepost=deletepost&deletepostid=' . get_the_ID(); ?>"><span class="round alert label">löschen</span></a>-->
-										<?php the_content( __( 'Continue reading...', 'foundationpress' ) ); ?>
-									</div>
-									<footer>
-									</footer>
+									<a href="<?php echo get_the_permalink(); ?>">
+										<header>
+											<?php if( isset($brands[0]) ){ echo '<strong>' . $brands[0]->name . '</strong><br />'; };?>
+											<h3><?php the_title(); ?></h3>
+											<?php //foundationpress_entry_meta(); ?>
+										</header>
+										<div>
+											Größe: <?php echo get_post_meta( get_the_ID(), 'item_size', true); ?> <br />
+											Gewicht: <?php echo get_post_meta( get_the_ID(), 'gearlist_weight', true); ?>g<br />
+											<!--<a href="<?php echo $permalinkmain . '?deletepost=deletepost&deletepostid=' . get_the_ID(); ?>"><span class="round alert label">löschen</span></a>-->
+											<?php the_content( __( 'Continue reading...', 'foundationpress' ) ); ?>
+										</div>
+										<footer>
+										</footer>
+									</a>
 								</div>
 							</div>
 
@@ -105,7 +124,7 @@ Loop
 
 
 	<!-- Sidebar -->
-	<div class="columns small-12 medium-4">
+	<div class="columns small-12 medium-4 show-for-medium-up">
 		<?php registerNewGearForm( $permalinkmain ); ?>
 
 
@@ -113,7 +132,7 @@ Loop
 			<strong>Neuer Hersteller hinzufügen:</strong>
 			<form action="<?php $permalinkmain ?>" method="get">
 				<input type="text" name="newbrand" placeholder="Hersteller">
-				<button class="button" type="submit">Erstellen</button>
+				<button class="button" type="submit">Hinzufügen</button>
 			</form>
 		</div>
 	</div>

@@ -30,8 +30,10 @@ $output .= '</span></h3>';
 
 if ( !empty($gearitems) ):
  ?>
-<table style="width: 100%;">
+
+
 <?php
+$output .='<div class="sublistcontainer"><table style="width: 100%;">';
 		
 	$output .= "<tr><th>#</th><th>Name</th><th></th><th>Kategorie</th><th>Umpacken</th><th>Gewicht</th><th>Gesamt</th><th></th></tr>";
 
@@ -92,6 +94,7 @@ $bodyWeight = 0; $consumerGoodsWeight = 0; $equipmentWeight = $gesamtgewicht;
 	$output .=	'<td class="hide-for-print"></td>';
 	$output .=	'</tr>';
 	$output .=	'</table>';
+	$output .=	'</div>';
 
 else:
 	$output.= get_the_title( $sublist ) . ' wurden noch keine Elemente zugewießen<br /><br />';

@@ -9,7 +9,7 @@ $permalinkmain = get_permalink();
 	<header class="columns small-12">
 		<h1><?php the_title(); ?></h1>
 	</header>
-	<div class="small-12 medium-8 columns" role="main">
+	<div class="small-12 medium-12 columns end" role="main">
 
 	<?php /* Start loop */ ?>
 	<?php while ( have_posts() ) : the_post(); ?>
@@ -38,20 +38,24 @@ $permalinkmain = get_permalink();
 					}
 
 						?>
-							<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-								
-									<header>
-										<h3><?php if( isset($brands[0]) ){ echo $brands[0]->name . ' – '; };?><a href="<?php echo get_the_permalink(); ?>"><?php the_title(); ?></a></h3>
-										<?php //foundationpress_entry_meta(); ?>
-									</header>
-									<div >
-										Gewicht: <?php echo get_post_meta( get_the_ID(), 'gearlist_weight', true); ?>g <a href="<?php echo $permalinkmain . '?deletepost=deletepost&deletepostid=' . get_the_ID(); ?>"><span class="round alert label">löschen</span></a>
-										<?php the_content( __( 'Continue reading...', 'foundationpress' ) ); ?>
-									</div>
-									<footer>
-									</footer>
-
-								<hr />
+							<article id="post-<?php the_ID(); ?>" <?php post_class('columns small-12 medium-4 singlegearitem'); ?> data-mh="singlegearitem">
+								<div class="panel" style="position:relative;" >
+									<a href="<?php echo get_the_permalink(); ?>">
+										<header>
+											<?php if( isset($brands[0]) ){ echo '<strong>' . $brands[0]->name . '</strong>'; };?>
+											<h3><?php the_title(); ?></h3>
+											<?php //foundationpress_entry_meta(); ?>
+										</header>
+										<div >
+											Größe: <?php echo get_post_meta( get_the_ID(), 'item_size', true); ?> <br />
+											Gewicht: <?php echo get_post_meta( get_the_ID(), 'gearlist_weight', true); ?>g <br />
+											<?php the_content( __( 'Continue reading...', 'foundationpress' ) ); ?>
+										</div>
+										<footer>
+										</footer>
+									</a>
+									<a href="<?php echo $permalinkmain . '?deletepost=deletepost&deletepostid=' . get_the_ID(); ?>"><i class="fa fa-trash-o" style="position:absolute; bottom: 10px; right:10px;"></i></a>
+								</div>
 							</article>
 
 						<?php
@@ -66,9 +70,9 @@ $permalinkmain = get_permalink();
 		</article>
 	<?php endwhile; ?>
 	</div>
-	<div class="columns small-12 medium-4">
+	<!--<div class="columns small-12 medium-4">
 		<?php registerNewGearForm( $permalinkmain ); ?>
-	</div>
+	</div>-->
 	
 	<!-- Der Nutzer bekommt nicht die Möglichkeit Gepäckkategorien zu erstellen --> 
 	<!--

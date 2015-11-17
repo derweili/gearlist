@@ -60,6 +60,9 @@ require_once( 'library/all-gear-by-type.php' );
 /** add gear list */
 require_once( 'library/add-remove-gear.php' );
 
+/** update gear */
+require_once( 'library/update-gear.php' );
+
 /** add gear list */
 require_once( 'library/add-remove-sublist.php' );
 
