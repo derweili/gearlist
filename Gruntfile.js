@@ -117,6 +117,7 @@ module.exports = function (grunt) {
 					'assets/components/foundation/js/foundation/foundation.slider.js',
 					'assets/components/foundation/js/foundation/foundation.tab.js',
 					'assets/components/foundation/js/foundation/foundation.tooltip.js',
+					
 					'assets/components/matchHeight/jquery.matchHeight.js',
 
 
