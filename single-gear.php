@@ -39,14 +39,12 @@ $geartypes = wp_get_post_terms( get_the_ID(), 'geartype');
 
 
 		 	if ($author == $current_user) {
-
 		 		get_template_part( 'parts/gear-content-private' );
-
-
-		 	}else{
+		 	}elseif( 0 != $current_user){
 		 		get_template_part( 'parts/gear-content-public' );
+		 	}else{
+		 		get_template_part( 'parts/gear-content-no-login' );
 		 	}
-
 		 	?>
 
 	<?php do_action( 'foundationpress_after_content' ); ?>

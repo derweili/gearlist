@@ -4,9 +4,7 @@ $brands = wp_get_post_terms( get_the_ID(), 'brand');
 $geartypes = wp_get_post_terms( get_the_ID(), 'geartype');
 ?>
 <div class="row" style="margin-bottom:20px">
-	<div class="columns small-12 medium-4"><img src="http://placehold.it/300x300&Text=Produktbild" alt="Produktbild"></div>
-
-	<div class="columns small-12 medium-8">
+	<div class="columns small-12 medium-8 end">
 		<strong><?php echo $brands[0]->name; ?></strong><br />
 		<h1><?php the_title(); ?></h1>
 		<ul>

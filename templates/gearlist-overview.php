@@ -9,56 +9,56 @@ $permalinkmain = get_permalink();
 	<header class="columns small-12">
 		<h1><?php the_title(); ?></h1>
 	</header>
+	<?php if (is_user_logged_in()): ?>
 	<div class="small-12 medium-8 columns" role="main">
-
 	<?php /* Start loop */ ?>
-	<?php while ( have_posts() ) : the_post(); ?>
-		<article <?php post_class() ?> id="post-<?php the_ID(); ?>">
+		<?php while ( have_posts() ) : the_post(); ?>
+			<article <?php post_class() ?> id="post-<?php the_ID(); ?>">
 
-			<div>
-				<?php the_content(); ?>
-			</div>
-			<div>
-				<?php 
-					global $post;  
-					$the_query = array(
-						'posts_per_page'   => '1000',
-						'post_type'     => 'gearlist',
-						'suppress_filters' => false,
-						//'meta_key'=>'_thumbnail_id',
-						'author' => get_current_user_id()
+				<div>
+					<?php the_content(); ?>
+				</div>
+				<div>
+					<?php 
+						global $post;  
+						$the_query = array(
+							'posts_per_page'   => '1000',
+							'post_type'     => 'gearlist',
+							'suppress_filters' => false,
+							//'meta_key'=>'_thumbnail_id',
+							'author' => get_current_user_id()
 
-					);
-					$posts = get_posts( $the_query );  
-					if(!empty($posts)):
+						);
+						$posts = get_posts( $the_query );  
+						if(!empty($posts)):
 
-					foreach( $posts as $post ): setup_postdata( $post );
-						?>
-							<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-								<header>
-									<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-									<?php //foundationpress_entry_meta(); ?>
-								</header>
-								<div >
-									<a href="<?php echo $permalinkmain . '?deletegearlist=' . get_the_ID(); ?>"><span class="round alert label">löschen</span></a>
-									<?php the_content( __( 'Continue reading...', 'foundationpress' ) ); ?>
-								</div>
-								<footer>
-								</footer>
-								<hr />
-							</article>
+						foreach( $posts as $post ): setup_postdata( $post );
+							?>
+								<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+									<header>
+										<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+										<?php //foundationpress_entry_meta(); ?>
+									</header>
+									<div >
+										<a href="<?php echo $permalinkmain . '?deletegearlist=' . get_the_ID(); ?>"><span class="round alert label">löschen</span></a>
+										<?php the_content( __( 'Continue reading...', 'foundationpress' ) ); ?>
+									</div>
+									<footer>
+									</footer>
+									<hr />
+								</article>
 
-						<?php
-					endforeach;
+							<?php
+						endforeach;
 
-					endif;
-				 ?>
-			</div>
-			
-			<footer>
-			</footer>
-		</article>
-	<?php endwhile; ?>
+						endif;
+					 ?>
+				</div>
+				
+				<footer>
+				</footer>
+			</article>
+		<?php endwhile; ?>
 	</div>
 	<div class="columns small-12 medium-4">
 		<strong>Neue Packliste erstellen:</strong>
@@ -68,5 +68,12 @@ $permalinkmain = get_permalink();
 			<button class="button" type="submit">Erstellen</button>
 		</form>
 	</div>
+
+	<?php else: ?>
+		<div style="text-align: center;">
+			<strong>Um Deine Ausrüstung verwalten zu können musst du dich anmelden:</strong><br /><br />
+			<a href="<?php echo home_url(); ?>/wp-login.php?redirect_to=<?php echo home_url(); ?>" class="button">Login</a>
+		</div>
+	<?php endif ?>
 </div>
 <?php get_footer(); ?>
