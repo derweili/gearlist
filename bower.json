@@ -1,12 +1,27 @@
 {
-  "name": "foundationpress",
+  "name": "gearlist",
   "main": [
     "assets/stylesheets/foundation.css",
     "assets/javascript/foundation.js"
   ],
-  "ignore": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "assets/components",
+    "test",
+    "tests"
+  ],
   "dependencies": {
-    "foundation-sites": "zurb/foundation-sites-6",
-    "fontawesome": "~4.4.0"
-  }
+    "matchHeight": "matchheight#~0.6.0",
+    "pizza": "zurb/pizza#~0.2.1"
+  },
+  "homepage": "https://github.com/julian-weiland/gearlist",
+  "authors": [
+    "julian-weiland <julianweiland@icloud.com>"
+  ],
+  "description": "",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true
 }
