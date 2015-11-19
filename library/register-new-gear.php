@@ -137,14 +137,15 @@ function registerNewGearForm( $permalinkmain ){
 				?>
 			</select>
 			<div class="row">
-				 <input id="gearpool_checkbox" type="checkbox" name="gearpool" checked>
+				 
 				<!--<div class="switch round columns small-3" style="margin-left:10px">
 				 
 				  <label for="gearpool_checkbox"></label>
 				</div>-->
-				<div class="columns small-8 end">
+				<label class="columns small-8" for="gearpoolcheckbox">
+					<input id="gearpoolcheckbox" type="checkbox" name="gearpool" checked>	
 					In Ausrüstung veröffentlichen.
-				</div>
+				</label>
 			</div>
 			<button class="button" type="submit">Erstellen</button>
 		</form>
