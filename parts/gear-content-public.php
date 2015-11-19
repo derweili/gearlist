@@ -48,7 +48,7 @@ if (count($posts) > 0): ?>
 
 
 <div id="addtomygear" class="reveal-modal small" data-reveal aria-labelledby="Zu eigenem Gear hinzufügen." aria-hidden="true" role="dialog">
-  <h2 id="modalTitle">Zu eigenem Gear hinzufügen.</h2>
+  <h2 id="modalTitle">Zu eigener Ausrüstung hinzufügen.</h2>
   	
 <form action="<?php $permalinkmain ?>" method="get">
 	<label for="">

@@ -94,7 +94,7 @@ Loop
 
 
 						?>
-							<div  id="post-<?php the_ID(); ?>" <?php post_class('columns small-12 medium-6 singlegearitem'); ?> >
+							<div  id="post-<?php the_ID(); ?>" <?php post_class('columns small-12 medium-6 singlegearitem end'); ?> >
 								<div class="panel" style="margin: 0; height: 145px">
 								<a href="<?php echo get_the_permalink(); ?>">
 									<div  style="margin-bottom:0">

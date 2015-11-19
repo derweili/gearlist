@@ -23,7 +23,8 @@ $geartypes = wp_get_post_terms( get_the_ID(), 'geartype');
 
 ?>
 <div class="row">
-	<div class="small-12 medium-12 large-8 large-offset-2 columns">
+	<div class="columns small-12 large-8 large-offset-2"><a onlick="window.history.back();" class="button">Zurück</a></div>
+	<div class="small-12 medium-12 large-8 large-offset-2 columns end">
 
 	<?php do_action( 'foundationpress_before_content' ); ?>
 	
