@@ -54,7 +54,7 @@ $permalinkmain = get_permalink();
 											<footer>
 											</footer>
 										</a>
-										<a href="<?php echo $permalinkmain . '?deletepost=deletepost&deletepostid=' . get_the_ID(); ?>"><i class="fa fa-trash-o" style="position:absolute; bottom: 10px; right:10px;"></i></a>
+										<a href="<?php echo $permalinkmain . '?deletepost=deletepost&deletepostid=' . get_the_ID(); ?>"  onclick="return confirm('<?php the_title(); ?> endgültig löschen?')"><i class="fa fa-trash-o" style="position:absolute; bottom: 10px; right:10px;"></i></a>
 									</div>
 								</article>
 
