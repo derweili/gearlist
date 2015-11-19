@@ -129,16 +129,18 @@ Loop
 
 	<!-- Sidebar -->
 	<div class="columns small-12 medium-4 show-for-medium-up">
-		<?php registerNewGearForm( $permalinkmain ); ?>
+		<?php if (is_user_logged_in()): ?>
+			<?php registerNewGearForm( $permalinkmain ); ?>
 
 
-		<div style="margin-top:20px">
-			<strong>Neuer Hersteller hinzufügen:</strong>
-			<form action="<?php $permalinkmain ?>" method="get">
-				<input type="text" name="newbrand" placeholder="Hersteller" required>
-				<button class="button" type="submit">Hinzufügen</button>
-			</form>
-		</div>
+			<div style="margin-top:20px">
+				<strong>Neuer Hersteller hinzufügen:</strong>
+				<form action="<?php $permalinkmain ?>" method="get">
+					<input type="text" name="newbrand" placeholder="Hersteller" required>
+					<button class="button" type="submit">Hinzufügen</button>
+				</form>
+			</div>
+		<?php endif ?>
 	</div>
 	
 	<!-- Der Nutzer bekommt nicht die Möglichkeit Gepäckkategorien zu erstellen --> 
