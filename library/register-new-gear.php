@@ -7,7 +7,7 @@ function registerNewGear(){
 	//
 	if (isset($_GET["newitem"])) {
 		$NewItem = $_GET["newitem"];
-		$gearItemName = $_GET["gearitemname"]; 		// Item Name
+		//$gearItemName = $_GET["gearitemname"]; 		// Item Name
 		$gearItemWeight = $_GET["gearitemweight"];	// Item Weight
 		$gearItemType = $_GET["gearitemtype"];		// Item Type
 		$gearItemBrand = $_GET["gearitembrand"];	// Item Brand
@@ -16,7 +16,7 @@ function registerNewGear(){
 
 		if ($NewItem != '') {
 			$my_post = array(
-			  'post_title'    => $gearItemName,
+			  'post_title'    => $NewItem,
 			  'post_type' => 'gear',
 			  'post_status'   => 'publish',
 			  'post_author'   => get_current_user_id(),
@@ -123,11 +123,10 @@ function registerNewGearForm( $permalinkmain ){
 				?>
 				<option value="other">Anderer Hersteller</option>
 			</select>
-			<input type="text" name="gearitemname" placeholder="Name" required>
+			<input type="text" name="newitem" placeholder="Name" required>
 			<input type="text" name="gearitemsize" placeholder="Größe" required>
 			<input type="number" name="gearitemweight" placeholder="Gewicht in Gramm" required>
 			
-			<input type="hidden" name="newitem" value="newitem">
 			<select name="gearitemtype" id="gearitemtype" required>
 				<option value="">Kategorie auswählen</option>
 				<?php 
@@ -138,12 +137,13 @@ function registerNewGearForm( $permalinkmain ){
 				?>
 			</select>
 			<div class="row">
-				<div class="switch round columns small-3" style="margin-left:10px">
-				  <input id="gearpool_checkbox" type="checkbox" name="gearpool" checked>
+				 <input id="gearpool_checkbox" type="checkbox" name="gearpool" checked>
+				<!--<div class="switch round columns small-3" style="margin-left:10px">
+				 
 				  <label for="gearpool_checkbox"></label>
-				</div>
+				</div>-->
 				<div class="columns small-8 end">
-					Im Gearpool veröffentlichen.
+					In Ausrüstung veröffentlichen.
 				</div>
 			</div>
 			<button class="button" type="submit">Erstellen</button>

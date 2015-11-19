@@ -41,6 +41,7 @@ Filter
 		</dl>
 		<div class="tabs-content">
 		  <div class="content active" id="panel1">
+		  	<span class="label filteritem" data-filter="singlegearitem">Alle</span>
 			<?php 
 				$geartype = get_terms( 'geartype', 'orderby=name&hide_empty=0' );
 					foreach ($geartype as $geartypesingle) {
@@ -49,6 +50,7 @@ Filter
 			?>
 		  </div>
 		  <div class="content" id="panel2">
+		  	<span class="label filteritem" data-filter="singlegearitem">Alle</span>
 			<?php 
 				$geartype = get_terms( 'brand', 'orderby=name&hide_empty=0' );
 				foreach ($geartype as $geartypesingle) {
@@ -92,9 +94,10 @@ Loop
 
 
 						?>
-							<div data-mh="my-group" id="post-<?php the_ID(); ?>" <?php post_class('columns small-12 medium-6 singlegearitem'); ?> data-mh="singlegearitem">
-								<div class="panel" data-equalizer-watch>
-									<a href="<?php echo get_the_permalink(); ?>">
+							<div  id="post-<?php the_ID(); ?>" <?php post_class('columns small-12 medium-6 singlegearitem'); ?> >
+								<div class="panel" style="margin: 0; height: 145px">
+								<a href="<?php echo get_the_permalink(); ?>">
+									<div  style="margin-bottom:0">
 										<header>
 											<?php if( isset($brands[0]) ){ echo '<strong>' . $brands[0]->name . '</strong><br />'; };?>
 											<h3><?php the_title(); ?></h3>
@@ -108,8 +111,9 @@ Loop
 										</div>
 										<footer>
 										</footer>
-									</a>
-								</div>
+									</div>
+								</a>
+							</div>
 							</div>
 
 						<?php
@@ -131,7 +135,7 @@ Loop
 		<div style="margin-top:20px">
 			<strong>Neuer Hersteller hinzufügen:</strong>
 			<form action="<?php $permalinkmain ?>" method="get">
-				<input type="text" name="newbrand" placeholder="Hersteller">
+				<input type="text" name="newbrand" placeholder="Hersteller" required>
 				<button class="button" type="submit">Hinzufügen</button>
 			</form>
 		</div>
