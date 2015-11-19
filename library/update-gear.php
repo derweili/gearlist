@@ -16,26 +16,28 @@ function updateGear(){
 		}
 
 
-		//Update Taxonomies
-		$updatetax =  array();
-			if (isset($_GET["updatebrand"])) {
-				$updateBrand = $_GET["updatebrand"];
-				$updatetax['brand'] = $updateBrand;
-			}
-
-			if (isset($_GET["updatetype"])) {
-				$updateType = $_GET["updatetype"];
-				$updatetax['geartype'] = $updateType;
-			}
-
-		if (!empty($updatetax)) {
-			$my_post['tax_input'] = $updatetax;
-		}
 
 
 		$updatedPost = wp_update_post( $my_post );
 
 
+		//Update Taxonomies
+		$updatetax =  array();
+			if (isset($_GET["updatebrand"])) {
+				$updateBrand = $_GET["updatebrand"];
+				$updatetax['brand'] = $updateBrand;
+				wp_set_post_terms( $updateGear, $updateBrand, 'brand', false );
+			}
+
+			if (isset($_GET["updatetype"])) {
+				$updateType = $_GET["updatetype"];
+				$updatetax['geartype'] = $updateType;
+				wp_set_post_terms( $updateGear, $updateType, 'geartype', false );
+			}
+
+		/*if (!empty($updatetax)) {
+			$my_post['tax_input'] = $updatetax;
+		}*/
 
 
 		//Update Metas
