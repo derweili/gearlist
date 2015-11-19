@@ -38,8 +38,8 @@ $permalinkmain = get_permalink();
 						}
 
 							?>
-								<article id="post-<?php the_ID(); ?>" <?php post_class('columns small-12 medium-4 singlegearitem'); ?> data-mh="singlegearitem">
-									<div class="panel" style="position:relative;" >
+								<article id="post-<?php the_ID(); ?>" <?php post_class('columns small-12 medium-4 singlegearitem end'); ?> >
+									<div class="panel" style="position:relative; height:180px">
 										<a href="<?php echo get_the_permalink(); ?>">
 											<header>
 												<?php if( isset($brands[0]) ){ echo '<strong>' . $brands[0]->name . '</strong>'; };?>
@@ -76,20 +76,5 @@ $permalinkmain = get_permalink();
 			</div>
 		<?php endif ?>
 	</div>
-	<!--<div class="columns small-12 medium-4">
-		<?php registerNewGearForm( $permalinkmain ); ?>
-	</div>-->
-	
-	<!-- Der Nutzer bekommt nicht die Möglichkeit Gepäckkategorien zu erstellen --> 
-	<!--
-		<div class="columns small-12">
-			<strong>Neue Gepäckkategorie erstellen:</strong>
-			<form action="<?php $permalinkmain ?>" method="get">
-					<input type="text" name="geartypename" placeholder="Name">
-					<input type="hidden" name="newgeartype" value="newgeartype">
-					<button class="button" type="submit">Erstellen</button>
-				</form>
-		</div>
-	-->
 </div>
 <?php get_footer(); ?>
