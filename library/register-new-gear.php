@@ -124,7 +124,7 @@ function registerNewGearForm( $permalinkmain ){
 				<option value="other">Anderer Hersteller</option>
 			</select>
 			<input type="text" name="newitem" placeholder="Name" required>
-			<input type="text" name="gearitemsize" placeholder="Größe" required>
+			<input type="text" name="gearitemsize" placeholder="Größe">
 			<input type="number" name="gearitemweight" placeholder="Gewicht in Gramm" required>
 			
 			<select name="gearitemtype" id="gearitemtype" required>
