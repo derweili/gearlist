@@ -121,7 +121,6 @@ function registerNewGearForm( $permalinkmain ){
 						echo '<option value="' . $brand->slug . '">' . $brand->name . '</option>';
 					}
 				?>
-				<option value="other">Anderer Hersteller</option>
 			</select>
 			<input type="text" name="newitem" placeholder="Name" required>
 			<input type="text" name="gearitemsize" placeholder="Größe">
