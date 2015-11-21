@@ -35,6 +35,7 @@ $permalinkmain = get_permalink();
 						foreach( $posts as $post ): setup_postdata( $post );
 						if ( wp_get_post_terms( get_the_ID(), 'brand') !== null) {
 							$brands = wp_get_post_terms( get_the_ID(), 'brand');
+							$geartype = wp_get_post_terms( get_the_ID(), 'geartype');
 						}
 
 							?>
@@ -46,8 +47,9 @@ $permalinkmain = get_permalink();
 												<h3><?php the_title(); ?></h3>
 												<?php //foundationpress_entry_meta(); ?>
 											</header>
-											<div >
-												Größe: <?php echo get_post_meta( get_the_ID(), 'item_size', true); ?> <br />
+											<div>
+												<?php if( isset($geartype[0]) ){ echo 'Kategorie : <strong>' . $geartype[0]->name . '</strong><br />'; };?>
+												<?php $gearsize = get_post_meta( get_the_ID(), 'item_size', true); if($gearsize != ''){ echo "Größe: " . $gearsize . '<br />';}; ?>
 												Gewicht: <?php echo get_post_meta( get_the_ID(), 'gearlist_weight', true); ?>g <br />
 												<?php the_content( __( 'Continue reading...', 'foundationpress' ) ); ?>
 											</div>
