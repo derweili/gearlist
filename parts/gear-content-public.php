@@ -63,7 +63,7 @@ if (count($posts) > 0): ?>
 	</label>
 	<label for="">
 		Größe
-		<input type="text" name="gearitemsize" placeholder="Größe" value="<?php echo get_post_meta( get_the_ID(), 'item_size', true); ?>" required>
+		<input type="text" name="gearitemsize" placeholder="Größe" value="<?php echo get_post_meta( get_the_ID(), 'item_size', true); ?>">
 	</label>
 	<div class="row collapse">
 		<label for="">Eigenes Gewicht in Gramm</label>
