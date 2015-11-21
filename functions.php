@@ -78,4 +78,8 @@ require_once( 'library/force-login.php' );
 /** Gearlist general functions */
 require_once( 'library/gearlist-basic-functions.php' );
 
+
+/** Gear Accordion */
+require_once( 'library/gear-accordion.php' );
+
 ?>

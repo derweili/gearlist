@@ -26,13 +26,13 @@ function updateGear(){
 			if (isset($_GET["updatebrand"])) {
 				$updateBrand = $_GET["updatebrand"];
 				$updatetax['brand'] = $updateBrand;
-				wp_set_post_terms( $updateGear, $updateBrand, 'brand', false );
+				wp_set_object_terms( $updateGear, $updateBrand, 'brand', false );
 			}
 
 			if (isset($_GET["updatetype"])) {
 				$updateType = $_GET["updatetype"];
 				$updatetax['geartype'] = $updateType;
-				wp_set_post_terms( $updateGear, $updateType, 'geartype', false );
+				wp_set_object_terms( $updateGear, $updateType, 'geartype', false );
 			}
 
 		/*if (!empty($updatetax)) {
@@ -113,7 +113,7 @@ $geartypes = wp_get_post_terms( $idmain, 'geartype');
 		</label>
 		<label for="">
 			Größe
-			<input type="text" name="updatesize" placeholder="Größe" value="<?php echo get_post_meta( $idmain, 'item_size', true); ?>" required>
+			<input type="text" name="updatesize" placeholder="Größe" value="<?php echo get_post_meta( $idmain, 'item_size', true); ?>">
 		</label>
 		<div class="row collapse">
 			<label for="">Gewicht in Gramm</label>
@@ -127,14 +127,25 @@ $geartypes = wp_get_post_terms( $idmain, 'geartype');
 		<label for="">
 			Kategorie
 			<select name="updatetype" id="gearitemtype" required>
-				<option value="">Kategorie auswählen</option>
+				<option value="" disabled>Kategorie auswählen</option>
 				<?php
-				$allgeartypes = get_terms( 'geartype', 'orderby=name&hide_empty=0' );
+				$allgeartypes = get_terms( 'geartype', 'orderby=name&hide_empty=0&parent=0' );
 					foreach ($allgeartypes as $geartypesingle) {
 						if ($geartypes[0]->slug == $geartypesingle->slug) {
-							echo '<option value="' . $geartypesingle->slug . '" selected>' . $geartypesingle->name . '</option>';
+							if ( get_term_children($geartypesingle->term_id, 'geartype') != null) {
+								echo '<option value="' . $geartypesingle->slug . '" selected disabled>' . $geartypesingle->name . '</option>';
+								gearlist_term_children_option($geartypesingle->term_id, $geartypesingle->slug, 'geartype', '- ' );
+							}else{
+								echo '<option value="' . $geartypesingle->slug . '" selected>' . $geartypesingle->name . '</option>';
+							}
+
 						}else{
-							echo '<option value="' . $geartypesingle->slug . '">' . $geartypesingle->name . '</option>';
+							if ( get_term_children($geartypesingle->term_id, 'geartype') != null) {
+								echo '<option value="' . $geartypesingle->slug . '" disabled>' . $geartypesingle->name . '</option>';
+								gearlist_term_children_option($geartypesingle->term_id, $geartypesingle->slug, 'geartype', '- ' );
+							}else{
+								echo '<option value="' . $geartypesingle->slug . '">' . $geartypesingle->name . '</option>';
+							}
 						};
 					}
 				?>

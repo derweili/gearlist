@@ -332,7 +332,7 @@ $gainsboro   : pink;
 
 // $include-html-accordion-classes: $include-html-classes;
 
-// $accordion-navigation-padding: rem-calc(16);
+$accordion-navigation-padding: rem-calc(5 10);
 // $accordion-navigation-bg-color: $silver;
 // $accordion-navigation-hover-bg-color: scale-color($accordion-navigation-bg-color, $lightness: -5%);
 // $accordion-navigation-active-bg-color: scale-color($accordion-navigation-bg-color, $lightness: -3%);
@@ -341,7 +341,7 @@ $gainsboro   : pink;
 // $accordion-navigation-font-family: $body-font-family;
 
 // $accordion-content-padding: ($column-gutter/2);
-// $accordion-content-active-bg-color: $white;
+$accordion-content-active-bg-color: rgba(0,0,0,0.3);
 
 // 02. Alert Boxes
 // - - - - - - - - - - - - - - - - - - - - - - - - -

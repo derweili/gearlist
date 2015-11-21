@@ -16,7 +16,7 @@ if (get_post_meta( $sublist, 'baseweight' ) != '') {
 
 //Headline
 $output = '<h3 class="">' . get_the_title($sublist);
-if (get_the_title() != 'Körper') {
+if (get_the_title($sublist) != 'Körper') {
 	$output .= '<a href="' . $permalinkmain . '?removesublist=' . $sublist . '" class="hide-for-print"><i class="fa fa-trash-o" style="float:right;"></i></a>';
 }
 

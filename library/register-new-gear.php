@@ -20,7 +20,7 @@ function registerNewGear(){
 			  'post_type' => 'gear',
 			  'post_status'   => 'publish',
 			  'post_author'   => get_current_user_id(),
-			  'tax_input'	  => array('geartype' => $gearItemType, 'brand' => $gearItemBrand)
+			  //'tax_input'	  => array('geartype' => $gearItemType, 'brand' => $gearItemBrand)
 			);
 
 			// Insert the post into the database
@@ -46,6 +46,11 @@ function registerNewGear(){
 				</script>';
 				exit();
 			}
+
+			wp_set_object_terms( $new_post_id, $gearItemBrand, 'brand', false );
+			wp_set_object_terms( $new_post_id, $gearItemType, 'geartype', false );
+
+
 		}
 	}
 
@@ -129,9 +134,20 @@ function registerNewGearForm( $permalinkmain ){
 			<select name="gearitemtype" id="gearitemtype" required>
 				<option value="">Kategorie auswählen</option>
 				<?php 
-				$geartype = get_terms( 'geartype', 'orderby=name&hide_empty=0' );
+
+				$terms_args = array(
+				    'orderby'           => 'name', 
+				    'hide_empty'        => true,
+				    'parent'            => '0'
+				); 
+				$geartype = get_terms( 'geartype', $terms_args );
 					foreach ($geartype as $geartypesingle) {
-						echo '<option value="' . $geartypesingle->slug . '">' . $geartypesingle->name . '</option>';
+						if ( get_term_children($geartypesingle->term_id, 'geartype') != null) {
+							echo '<option value="' . $geartypesingle->slug . '" disabled>' . $geartypesingle->name . '</option>';
+							gearlist_term_children_option($geartypesingle->term_id, $geartypesingle->slug, 'geartype', '- ' );
+						}else{
+							echo '<option value="' . $geartypesingle->slug . '">' . $geartypesingle->name . '</option>';
+						}
 					}
 				?>
 			</select>
@@ -149,4 +165,25 @@ function registerNewGearForm( $permalinkmain ){
 			<button class="button" type="submit">Erstellen</button>
 		</form>
 		<?
+}
+
+
+function gearlist_term_children_option($term_id, $term_slug, $taxonomy, $prefix){
+
+	$child_terms_args = array(
+	    'orderby'           => 'name', 
+	    'hide_empty'        => false, 
+	    'parent'            => $term_id
+	); 
+	$geartype = get_terms( $taxonomy, $child_terms_args );
+
+	foreach ($geartype as $geartypesingle) {
+		
+		if ( get_term_children($geartypesingle->term_id, 'geartype') == null) {
+			echo '<option value="' . $geartypesingle->slug . '">' . $prefix . $geartypesingle->name . '</option>';
+		}else{
+			echo '<option value="' . $geartypesingle->slug . '" disabled>' . $prefix . $geartypesingle->name . '</option>';
+			gearlist_term_children_option($geartypesingle->term_id, $geartypesingle->slug, 'geartype', '- '.$prefix );
+		}	
+	}
 }

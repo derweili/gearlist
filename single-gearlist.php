@@ -71,21 +71,10 @@ $idmain = get_the_ID();
 		<div class="columns small-12">
 			<h3>Vorhandenes Element hinzufügen:</h3>
 		</div>
-
-			<?php
-			$geartype = get_terms( 'geartype', 'orderby=name&hide_empty=1' ); //Get all Geartype Taxonomie entries
-			$totalgeartypecount = count($geartype);
-			$geartypecount = 0;
-			$endclass = '';
-			foreach ($geartype as $geartypesingle) {
-				$geartypecount++;
-				if($totalgeartypecount == $geartypecount){$endclass = 'end';};
-				echo '<div class="columns small-12 ' . $endclass . '">';
-				echo $geartypesingle->name . '<br />';
-				allGearByType($permalinkmain, $geartypesingle->slug, $allsublists);			//Get Gearoverview by Geartype Taxonomie
-				echo "</div>";
-			}
- ?>
+		<hr>
+		<ul class="accordion" data-accordion>
+			<?php gear_accordion(0, $permalinkmain, $allsublists); ?>
+ 		</ul>
 	</div>
 
 	

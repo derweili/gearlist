@@ -6,18 +6,20 @@ get_header();
 $permalinkmain = get_permalink();
 ?>
 <div class="row">
-	<div class="columns small-12 medium-4 show-for-small">
-		<?php registerNewGearForm( $permalinkmain ); ?>
+	<?php if (is_user_logged_in()): ?>
+		<div class="columns small-12 medium-4 show-for-small">
+			<?php registerNewGearForm( $permalinkmain ); ?>
 
 
-		<div style="margin-top:20px">
-			<strong>Neuer Hersteller hinzufügen:</strong>
-			<form action="<?php $permalinkmain ?>" method="get">
-				<input type="text" name="newbrand" placeholder="Hersteller">
-				<button class="button" type="submit">Hinzufügen</button>
-			</form>
+			<div style="margin-top:20px">
+				<strong>Neuer Hersteller hinzufügen:</strong>
+				<form action="<?php $permalinkmain ?>" method="get">
+					<input type="text" name="newbrand" placeholder="Hersteller">
+					<button class="button" type="submit">Hinzufügen</button>
+				</form>
+			</div>
 		</div>
-	</div>
+	<?php endif; ?>
 
 	
 	<header class="columns small-12">
@@ -55,7 +57,7 @@ Filter
 				$geartype = get_terms( 'brand', 'orderby=name&hide_empty=0' );
 				foreach ($geartype as $geartypesingle) {
 					echo '<span class="label filteritem ' . $geartypesingle->slug . '" data-filter="brand-' . $geartypesingle->slug . '">' . $geartypesingle->name . '</span> ';
-			};
+				};
 			?>
 		  </div>
 		</div>
@@ -90,6 +92,7 @@ Loop
 					foreach( $posts as $post ): setup_postdata( $post );
 					if ( wp_get_post_terms( get_the_ID(), 'brand') !== null) {
 						$brands = wp_get_post_terms( get_the_ID(), 'brand');
+						$geartype = wp_get_post_terms( get_the_ID(), 'geartype');
 					}
 
 
@@ -104,7 +107,8 @@ Loop
 											<?php //foundationpress_entry_meta(); ?>
 										</header>
 										<div>
-											Größe: <?php echo get_post_meta( get_the_ID(), 'item_size', true); ?> <br />
+											<?php if( isset($geartype[0]) ){ echo 'Kategorie : <strong>' . $geartype[0]->name . '</strong><br />'; };?>
+											<?php $gearsize = get_post_meta( get_the_ID(), 'item_size', true); if ($gearsize != ''){echo "Größe: " . $gearsize . "<br />";}?> 
 											Gewicht: <?php echo get_post_meta( get_the_ID(), 'gearlist_weight', true); ?>g<br />
 											<!--<a href="<?php echo $permalinkmain . '?deletepost=deletepost&deletepostid=' . get_the_ID(); ?>"><span class="round alert label">löschen</span></a>-->
 											<?php the_content( __( 'Continue reading...', 'foundationpress' ) ); ?>
