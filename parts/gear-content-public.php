@@ -59,7 +59,7 @@ if (count($posts) > 0): ?>
 	</label>
 	<label for="">
 		Name
-		<input type="text" name="gearitemname" placeholder="Name" value="<?php the_title(); ?>" required>
+		<input type="text" name="newitem" placeholder="Name" value="<?php the_title(); ?>" required>
 	</label>
 	<label for="">
 		Größe
@@ -80,7 +80,6 @@ if (count($posts) > 0): ?>
 			<option value="<?php echo $geartypes[0]->slug; ?>" selected><?php echo $geartypes[0]->name; ?></option>
 		</select>
 	</label>
-	<input type="hidden" name="newitem" value="newitem">
 	<input type="hidden" name="newitemparent" value="<?php echo $idmain; ?>">
 	<button class="button" type="submit">Erstellen</button>
 </form>
