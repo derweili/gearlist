@@ -13,12 +13,18 @@ get_header();
 //$removeGear = $_GET["removegear"];
 //$removeGearSublist = $_GET["removegearsublist"];
 //$gearSublist = $_GET["sublist"];
+global $post;
+global $user;
 
 $permalinkmain = get_permalink();
 $idmain = get_the_ID();
 
-?>
 
+$author = $post->post_author;
+$current_user = wp_get_current_user()->ID;
+
+?>
+<?php the_author_meta( 'user_email' ); ?> 
 <div class="row">
 	<div class="small-12 medium-9 large-8 columns" role="main">
 
@@ -68,6 +74,7 @@ $idmain = get_the_ID();
 	</div>
 
 	<div class="addgearcontainer columns small-12 medium-3 large-4 hide-for-print">
+		<?php if ($author == $current_user) { ?>
 		<div class="columns small-12">
 			<h3>Vorhandenes Element hinzufügen:</h3>
 		</div>
@@ -75,6 +82,7 @@ $idmain = get_the_ID();
 		<ul class="accordion" data-accordion>
 			<?php gear_accordion(0, $permalinkmain, $allsublists); ?>
  		</ul>
+ 		<?php }; ?>
 	</div>
 
 	
