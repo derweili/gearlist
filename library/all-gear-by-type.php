@@ -24,7 +24,7 @@ function allGearByType($permalinkmain, $geartype, $allsublists, $current_user){
 		$brand = wp_get_post_terms( get_the_id(), 'brand');
 
 		?>	
-			<button href="#" data-dropdown="drop<?php echo get_the_ID(); ?>" aria-controls="drop<?php echo get_the_ID(); ?>" aria-expanded="false" class="button tiny dropdown"><?php echo $brand[0]->name; ?> - <?php the_title(); ?> <?php if ($geartype == 'verbrauchsgueter'){ echo '- ' . get_post_meta( get_the_ID(), 'item_size', true); };?></button><br>
+			<button href="#" data-dropdown="drop<?php echo get_the_ID(); ?>" aria-controls="drop<?php echo get_the_ID(); ?>" aria-expanded="false" class="button tiny dropdown"><?php the_title(); ?> - <?php echo $brand[0]->name; ?> <?php if ($geartype == 'verbrauchsgueter'){ echo '- ' . get_post_meta( get_the_ID(), 'item_size', true); };?></button><br>
 			<ul id="drop<?php echo get_the_ID(); ?>" data-dropdown-content class="f-dropdown" aria-hidden="true">
 				<?php foreach ($allsublists as $value): ?>
 					<li><a href="<?php echo $permalinkmain ?>?addgear=<?php echo get_the_ID(); ?>&addgearsublist=<?php echo $value; ?>"><?php echo get_the_title($value); ?></a></li>
