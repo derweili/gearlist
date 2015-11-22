@@ -13,6 +13,35 @@ $permalinkmain = get_permalink();
 	<?php if (is_user_logged_in()): ?>
 	<?php /* Start loop */ ?>
 		<?php while ( have_posts() ) : the_post(); ?>
+		<div class="filter-section">
+			Filter:<br />
+
+			<dl class="tabs" data-tab>
+			  <dd class="active"><a href="#panel1">Kategorie</a></dd>
+			  <dd><a href="#panel2">Hersteller</a></dd>
+			</dl>
+			<div class="tabs-content">
+			  <div class="content active" id="panel1">
+			  	<span class="label filteritem" data-filter="singlegearitem">Alle</span>
+				<?php 
+					$geartype = get_terms( 'geartype', 'orderby=name&hide_empty=0' );
+						foreach ($geartype as $geartypesingle) {
+							echo '<span class="label filteritem ' . $geartypesingle->slug . '" data-filter="geartype-' . $geartypesingle->slug . '">' . $geartypesingle->name . '</span> ';
+					}
+				?>
+			  </div>
+			  <div class="content" id="panel2">
+			  	<span class="label filteritem" data-filter="singlegearitem">Alle</span>
+				<?php 
+					$geartype = get_terms( 'brand', 'orderby=name&hide_empty=0' );
+					foreach ($geartype as $geartypesingle) {
+						echo '<span class="label filteritem ' . $geartypesingle->slug . '" data-filter="brand-' . $geartypesingle->slug . '">' . $geartypesingle->name . '</span> ';
+					};
+				?>
+			  </div>
+			</div>
+		</div>
+
 			<article <?php post_class() ?> id="post-<?php the_ID(); ?>">
 
 				<div>

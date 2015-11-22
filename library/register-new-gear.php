@@ -74,6 +74,25 @@ function registerNewGear(){
 		addSublist($new_post_id, 'Körper', ''); //Automaticly register new Sublist
 	}
 
+	//Rename Gearlist
+	if (isset($_GET["editgearlisttitle"])) {
+		$my_post = array(
+			'ID'           => $_GET["editgearlistid"],
+		);
+		$my_post['post_title'] = $_GET["editgearlisttitle"];
+
+		$updatedPost = wp_update_post( $my_post );
+
+
+		$newItemUrl = get_the_permalink($updatedPost);
+		echo '<script type="text/javascript">
+		<!--
+		window.location = "' . $newItemUrl . '?alertMessage=Die Änderungen wurden gespeichert&alertMessageType=success";
+		//–>
+		</script>';
+		exit();
+
+	}
 
 
 	//Delete Gear

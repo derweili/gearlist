@@ -27,7 +27,6 @@ $idmain = get_the_ID();
 
 
 		<div class="columns small-12"></div>
-		<a href="http://gearlist/meine-packlisten/" class="button" style="font-weight:bold">Jetzt neue Gearlist erstellen</a>
 	</div>
 </div>
 

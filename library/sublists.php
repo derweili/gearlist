@@ -35,9 +35,9 @@ if ( !empty($gearitems) ):
 <?php
 $output .='<div class="sublistcontainer"><table style="width: 100%;">';
 		
-	$output .= "<tr><th>#</th><th>Name</th><th></th><th>Kategorie</th><th>Umpacken</th><th>Gewicht</th><th>Gesamt</th><th></th></tr>";
+	$output .= "<tr><th>#</th><th>Name</th><th>Hersteller</th><th></th><th>Kategorie</th><th>Umpacken</th><th>Gewicht</th><th>Gesamt</th><th></th></tr>";
 
-$bodyWeight = 0; $consumerGoodsWeight = 0; $equipmentWeight = $gesamtgewicht;
+	$bodyWeight = 0; $consumerGoodsWeight = 0; $equipmentWeight = $gesamtgewicht;
 
 	foreach ($gearitems as $value):
 		$einzelgewicht = get_post_meta( $value, 'gearlist_weight', true);
@@ -45,6 +45,7 @@ $bodyWeight = 0; $consumerGoodsWeight = 0; $equipmentWeight = $gesamtgewicht;
 		$itemWeight = get_post_meta( $value, 'gearlist_weight', true);
 		$itemWeightSubtotal = $itemCount * $itemWeight;
 		$itemType = wp_get_post_terms( $value, 'geartype');
+		$brand = wp_get_post_terms( $value, 'brand');
 
 		//for the statistic
 		
@@ -68,6 +69,7 @@ $bodyWeight = 0; $consumerGoodsWeight = 0; $equipmentWeight = $gesamtgewicht;
 		$row .= '<tr>';
 		$row = '<td>' . $itemCount . '</td>';
 		$row .= '<td>' . get_the_title( $value ) . '</td>';
+		$row .= '<td>' . $brand[0]->name . '</td>';
 		$row .= '<td class="hide-for-print" style="width:50px"><a href="' . $permalinkmain . '?increasegear=' . $value . '&increasegearsublist=' . $sublist . '"><i class="fa fa-plus"></i></a> <a href="' . $permalinkmain . '?reducegear=' . $value . '&reducegearsublist=' . $sublist . '"><i class="fa fa-minus"></i></a></td>'; // Geartype Name
 		$row .= '<td>' . $itemType[0]->name . '</td>'; // Geartype Name
 		$row .= '<td>'. drag_dropdown($post_ID, $value, $allsublists, $sublist, $permalinkmain, $itemCount) .'</td>';
@@ -86,6 +88,7 @@ $bodyWeight = 0; $consumerGoodsWeight = 0; $equipmentWeight = $gesamtgewicht;
 	$output .=	'<tr>';
 	$output .=	'<td></td>';
 	$output .=	'<td><strong>Gesamt</strong></td>';
+	$output .=	'<td></td>';
 	$output .=	'<td></td>';
 	$output .=	'<td></td><!-- Platzhalter für "Verschieben" Button, den es in der Gesamt Zeile nicht gibt -->';
 	$output .=	'<td></td>';

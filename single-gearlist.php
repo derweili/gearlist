@@ -24,16 +24,30 @@ $author = $post->post_author;
 $current_user = wp_get_current_user()->ID;
 
 ?>
-<?php the_author_meta( 'user_email' ); ?> 
+
 <div class="row">
-	<div class="small-12 medium-9 large-8 columns" role="main">
+	<div class="small-12 medium-9 large-9 columns" role="main">
 
 	<?php do_action( 'foundationpress_before_content' ); ?>
 
 	<?php while ( have_posts() ) : the_post(); ?>
 		<article <?php post_class() ?> id="post-<?php the_ID(); ?>">
 			<header>
-				<h1 class="entry-title"><?php the_title(); ?></h1>
+			  <form class="row edit-title-form" style="display: none" action="<?php $permalinkmain ?>" method="get">
+			    <div class="large-12 columns">
+			      <div class="row collapse">
+			        <div class="small-8 columns">
+			          <input type="text" placeholder="Titel" id="edittitletext" name="editgearlisttitle" value="<?php the_title(); ?>">
+			          <input type="hidden" name="editgearlistid" value="<?php echo get_the_id(); ?>">
+			        </div>
+			        <div class="small-4 columns">
+			          <button class="button postfix" type="submit">Umbenennen</button>
+			        </div>
+			      </div>
+			    </div>
+			  </form>
+
+				<h1 class="entry-title"><?php the_title(); ?> <i class="fa fa-pencil edit-title" style="font-size:0.5em; margin-top:-10px; display:inline-block; position:relative; cursor:pointer"></i></h1>
 			</header>
 		</article>
 	<?php endwhile;?>
@@ -73,14 +87,14 @@ $current_user = wp_get_current_user()->ID;
 
 	</div>
 
-	<div class="addgearcontainer columns small-12 medium-3 large-4 hide-for-print">
+	<div class="addgearcontainer columns small-12 medium-3 large-3 hide-for-print">
 		<?php if ($author == $current_user) { ?>
 		<div class="columns small-12">
 			<h3>Vorhandenes Element hinzufügen:</h3>
 		</div>
 		<hr>
 		<ul class="accordion" data-accordion>
-			<?php gear_accordion(0, $permalinkmain, $allsublists); ?>
+			<?php gear_accordion(0, $permalinkmain, $allsublists, $current_user); ?>
  		</ul>
  		<?php }; ?>
 	</div>

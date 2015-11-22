@@ -1,5 +1,5 @@
 <?php
-function gear_accordion($parent, $permalinkmain, $allsublists){
+function gear_accordion($parent, $permalinkmain, $allsublists, $current_user){
 	$args = array(
 	    'orderby'           => 'name', 
 	    'parent'            => $parent,
@@ -18,11 +18,11 @@ function gear_accordion($parent, $permalinkmain, $allsublists){
 								$geartypesingleid = $geartypesingle->term_id;
 								if ( get_term_children($geartypesingleid, 'geartype') != null) {
 									echo '<ul class="accordion" data-accordion>';
-									gear_sub_accordion( $geartypesingleid, $permalinkmain, $allsublists);
+									gear_sub_accordion( $geartypesingleid, $permalinkmain, $allsublists, $current_user);
 									echo '</ul>';
 								}else{
 
-									allGearByType($permalinkmain, $geartypesingle->slug, $allsublists);			//Get Gearoverview by Geartype Taxonomie
+									allGearByType($permalinkmain, $geartypesingle->slug, $allsublists, $current_user);			//Get Gearoverview by Geartype Taxonomie
 								}
 				echo '</div>';
 
@@ -32,7 +32,7 @@ function gear_accordion($parent, $permalinkmain, $allsublists){
 
 
 
-function gear_sub_accordion($parent, $permalinkmain, $allsublists){
+function gear_sub_accordion($parent, $permalinkmain, $allsublists, $current_user){
 	$args = array(
 	    'orderby'           => 'name', 
 	    'parent'            => $parent,
@@ -52,11 +52,11 @@ function gear_sub_accordion($parent, $permalinkmain, $allsublists){
 								$geartypesingleid = $geartypesingle->term_id;
 								if ( get_term_children($geartypesingleid, 'geartype') != null) {
 									echo '<ul class="accordion" data-accordion>';
-									gear_sub_accordion( $geartypesingleid, $permalinkmain, $allsublists);
+									gear_sub_accordion( $geartypesingleid, $permalinkmain, $allsublists, $current_user);
 									echo '</ul>';
 								}else{
 
-									allGearByType($permalinkmain, $geartypesingle->slug, $allsublists);			//Get Gearoverview by Geartype Taxonomie
+									allGearByType($permalinkmain, $geartypesingle->slug, $allsublists, $current_user);			//Get Gearoverview by Geartype Taxonomie
 								}
 				echo '</div>';
 
