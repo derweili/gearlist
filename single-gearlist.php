@@ -83,7 +83,20 @@ $current_user = wp_get_current_user()->ID;
 				</li>
 			</ul>
 		</div>
-
+		<div class="columns small-4">
+			<div id="my-cool-chart"></div>
+		</div>
+		<div class="columns small-3 end">
+			<ul data-pie-id="my-cool-chart" data-options='{"donut": "true", "donut_inner_ratio": 0.5, "show_percent": false}'>
+			  <li data-value="36">Pepperoni</li>
+			  <li data-value="14">Sausage</li>
+			  <li data-value="8">Cheese</li>
+			  <li data-value="11">Mushrooms</li>
+			  <li data-value="7">Chicken</li>
+			  <li data-value="24">Other</li>
+			</ul>
+		</div>
+		
 
 	</div>
 

@@ -22,7 +22,7 @@ $idmain = get_the_ID();
 			<li>Größe: <?php echo get_post_meta( get_the_ID(), 'item_size', true); ?> </li>
 			<li>Gewicht: <?php echo get_post_meta( get_the_ID(), 'gearlist_weight', true); ?>g</li>
 			<li>Kategorie: <?php echo $geartypes[0]->name; ?></li>
-			<li style="list-style:none;"><a href="" class="" data-reveal-id="updategear" style="color:darkred<">Ausrüstung bearbeiten</a></li>
+			<li style="list-style:none;"><a href="" class="" data-reveal-id="updategear" style="color:darkred<" class="editgearmodalbutton">Ausrüstung bearbeiten</a></li>
 		</ul>
 
 

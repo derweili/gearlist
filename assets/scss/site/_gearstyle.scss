@@ -57,3 +57,35 @@
     top: initial!important;
     left: initial!important;
 }
+
+
+
+.minict_wrapper.default{
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    background-color: #FAFAFA;
+    border-radius: 0;
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9z…2ZSI+PHBvbHlnb24gcG9pbnRzPSI1Ljk5MiwwIDIuOTkyLDMgLTAuMDA4LDAgIi8+PC9zdmc+");
+    background-position: 100% center;
+    background-repeat: no-repeat;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ccc;
+    color: rgba(0,0,0,0.75)!important;
+    font-family: inherit;
+    font-size: 0.875rem!important;
+    line-height: normal;
+    padding: 0;
+    border-radius: 0;
+    height: 2.3125rem;
+    margin-right: 0!important;
+    margin-bottom: $column-gutter;
+    width: 100%;
+    > span{
+    		color: rgba(0,0,0,0.75)!important;
+    		font-size: 0.875rem;
+    	&:empty:before{
+    		//color: rgba(0,0,0,0.75)!important;
+    	}
+    }
+}

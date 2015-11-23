@@ -65,6 +65,8 @@
   Add your scss files below to structure your project styles
 */
 
+@import "../components/minimalect/jquery.minimalect.scss";
+
 @import "site/global";
 @import "site/wp-admin";
 @import "site/topbar";
@@ -73,3 +75,7 @@
 @import "site/footer";
 
 @import "site/gearstyle";
+
+
+@import "../components/pizza/scss/pizza.scss";
+

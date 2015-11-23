@@ -92,19 +92,31 @@ $geartypes = wp_get_post_terms( $idmain, 'geartype');
 		<input type="hidden" name="updategear" value="<?php echo get_the_ID(); ?>">
 		<label for="">
 			Hersteller
-			<select name="updatebrand" id="gearitembrand" required>
-				<option value="" disabled selected>Hersteller auswählen</option>
+			<select name="updatebrand" id="gearitembrand" class="updategearbrand" required>
+				<!--<option value="" disabled selected>Hersteller auswählen</option>-->
 				<?php 
 				$allbrands = get_terms( 'brand', 'orderby=name&hide_empty=0' );
+				$groupFirstLetter = 'A';
+				echo '<optgroup label="A">';
+
 					foreach ($allbrands as $singlebrand) {
+
+						$firstletter = $singlebrand->name;
+						$firstletter = $firstletter[0];
+						if ($firstletter != $groupFirstLetter) {
+							echo '</optgroup>';
+							echo '<optgroup label="' . $firstletter . '">';
+							$groupFirstLetter = $firstletter;
+						}
 						if ($singlebrand->slug == $brands[0]->slug) {
 							echo '<option value="' . $singlebrand->slug . '" selected>' . $singlebrand->name . '</option>';
 						}else{
 							echo '<option value="' . $singlebrand->slug . '">' . $singlebrand->name . '</option>';
 						};
 					}
+					echo "</optgroup>";
+
 				?>
-				<option value="other">Anderer Hersteller</option>
 			</select>
 		</label>
 		<label for="">

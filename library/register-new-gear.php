@@ -137,20 +137,29 @@ function registerNewGearForm( $permalinkmain ){
 	?>
 	<strong>Neue Ausrüstung erstellen:</strong>
 		<form action="<?php $permalinkmain ?>" method="get">
-			<select name="gearitembrand" id="gearitembrand" required>
-				<option value="" disabled selected>Hersteller auswählen</option>
+			<select name="gearitembrand" id="gearitembrand" class="registergearitembrand" required placeholder="Hersteller wählen">
 				<?php 
 				$brands = get_terms( 'brand', 'orderby=name&hide_empty=0' );
+				$groupFirstLetter = 'A';
+					echo '<optgroup label="A">';
 					foreach ($brands as $brand) {
+						$firstletter = $brand->name;
+						$firstletter = $firstletter[0];
+						if ($firstletter != $groupFirstLetter) {
+							echo '</optgroup>';
+							echo '<optgroup label="' . $firstletter . '">';
+							$groupFirstLetter = $firstletter;
+						}
 						echo '<option value="' . $brand->slug . '">' . $brand->name . '</option>';
 					}
+					echo "</optgroup>";
 				?>
 			</select>
 			<input type="text" name="newitem" placeholder="Name" required>
 			<input type="text" name="gearitemsize" placeholder="Größe">
 			<input type="number" name="gearitemweight" placeholder="Gewicht in Gramm" required>
 			
-			<select name="gearitemtype" id="gearitemtype" required>
+			<select name="gearitemtype" id="gearitemtype" class="registergearitemtype" required>
 				<option value="">Kategorie auswählen</option>
 				<?php 
 
@@ -163,7 +172,9 @@ function registerNewGearForm( $permalinkmain ){
 					foreach ($geartype as $geartypesingle) {
 						if ( get_term_children($geartypesingle->term_id, 'geartype') != null) {
 							echo '<option value="' . $geartypesingle->slug . '" disabled>' . $geartypesingle->name . '</option>';
+							//echo '<optgroup label="' . $geartypesingle->name . '">';
 							gearlist_term_children_option($geartypesingle->term_id, $geartypesingle->slug, 'geartype', '- ' );
+							//echo '</optgroup>';
 						}else{
 							echo '<option value="' . $geartypesingle->slug . '">' . $geartypesingle->name . '</option>';
 						}
@@ -202,7 +213,9 @@ function gearlist_term_children_option($term_id, $term_slug, $taxonomy, $prefix)
 			echo '<option value="' . $geartypesingle->slug . '">' . $prefix . $geartypesingle->name . '</option>';
 		}else{
 			echo '<option value="' . $geartypesingle->slug . '" disabled>' . $prefix . $geartypesingle->name . '</option>';
+			//echo '<optgroup label="' . $geartypesingle->name . '">';
 			gearlist_term_children_option($geartypesingle->term_id, $geartypesingle->slug, 'geartype', '- '.$prefix );
+			//echo '</optgroup>';
 		}	
 	}
 }

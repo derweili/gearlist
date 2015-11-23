@@ -119,6 +119,10 @@ module.exports = function (grunt) {
 					'assets/components/foundation/js/foundation/foundation.tooltip.js',
 					
 					'assets/components/matchHeight/jquery.matchHeight.js',
+					'assets/components/Snap.svg/dist/snap.svg.js',
+					'assets/components/pizza/dist/js/pizza.js',
+					'assets/components/minimalect/jquery.minimalect.js',
+
 					'assets/components/validatr/dist/validatr.min.js',
 
 
