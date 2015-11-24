@@ -73,27 +73,16 @@ $current_user = wp_get_current_user()->ID;
 		
 		<div class="columns small-12">
 			<h3>Auswertung:</h3>
-			<ul>
-				<li>Gewicht am Körper: <?php echo $bodyWeight; ?>g</li>
-				<li>Gewicht des Gepäcks: <?php echo $consumerGoodsWeight + $equipmentWeight; ?>g
-					<ul>
-						<li>Darin enthaltene Verbrauchsgüter: <?php echo $consumerGoodsWeight; ?>g</li>
-						<li>Darin enthaltene Ausrüstung: <?php echo $equipmentWeight; ?>g</li>
-					</ul>
-				</li>
-			</ul>
 		</div>
 		<div class="columns small-4">
 			<div id="my-cool-chart"></div>
 		</div>
-		<div class="columns small-3 end">
-			<ul data-pie-id="my-cool-chart" data-options='{"donut": "true", "donut_inner_ratio": 0.5, "show_percent": false}'>
-			  <li data-value="36">Pepperoni</li>
-			  <li data-value="14">Sausage</li>
-			  <li data-value="8">Cheese</li>
-			  <li data-value="11">Mushrooms</li>
-			  <li data-value="7">Chicken</li>
-			  <li data-value="24">Other</li>
+		<div class="columns small-5 end">
+			<ul data-pie-id="my-cool-chart" data-options='{"donut": "false", "donut_inner_ratio": 0, "show_percent": true}'>
+			  <li data-value="<?php echo $bodyWeight; ?>">Gewicht am Körper: <?php echo $bodyWeight; ?>g</li>
+			  <li data-value="<?php echo $consumerGoodsWeight; ?>">Gepäck - Verbrauchsgüter: <?php echo $consumerGoodsWeight; ?>g</li>
+			  <li data-value="<?php echo $equipmentWeight; ?>">Gepäck - Ausrüstung: <?php echo $equipmentWeight; ?>g</li>
+
 			</ul>
 		</div>
 		

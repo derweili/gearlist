@@ -122,6 +122,7 @@ module.exports = function (grunt) {
 					'assets/components/Snap.svg/dist/snap.svg.js',
 					'assets/components/pizza/dist/js/pizza.js',
 					'assets/components/minimalect/jquery.minimalect.js',
+					'assets/components/offline/offline.js',
 
 					'assets/components/validatr/dist/validatr.min.js',
 

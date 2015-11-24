@@ -13,13 +13,14 @@
     "tests"
   ],
   "dependencies": {
-    "fontawesome": "~4.4.0",
-    "foundation-sites": "zurb/foundation-sites-6",
-    "validatr": "jaymorrow/validatr#~0.5.1"
+    "matchHeight": "matchheight#~0.6.0",
+    "minimalect": "*",
+    "offline": "~0.7.14",
+    "pizza": "zurb/pizza#~0.2.1"
   },
   "homepage": "https://github.com/julian-weiland/gearlist",
   "authors": [
-    "julian-weiland <julianweiland@icloud.com>"
+    "julianweiland"
   ],
   "description": "",
   "moduleType": [],

@@ -100,7 +100,15 @@ function registerNewGear(){
 		$deltePost = $_GET["deletepost"];
 		$deletePostId = $_GET["deletepostid"];
 		if ($deltePost != '') {
-			wp_delete_post($deletePostId);
+			if (get_post_type($deletePostId) == 'gear' && get_post_meta($deletePostId, 'gearpool', true)) {
+				$my_post = array(
+				  'ID'           => $deletePostId,
+				  'post_author' => 1
+				);
+			  	wp_update_post( $my_post );
+			}else{
+				wp_delete_post($deletePostId);				
+			}
 		}
 	}
 

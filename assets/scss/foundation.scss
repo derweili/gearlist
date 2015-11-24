@@ -66,6 +66,8 @@
 */
 
 @import "../components/minimalect/jquery.minimalect.scss";
+@import "../components/offline/themes/offline-theme-default.css";
+@import "../components/offline/themes/offline-language-german.css";
 
 @import "site/global";
 @import "site/wp-admin";

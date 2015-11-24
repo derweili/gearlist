@@ -89,3 +89,16 @@
     	}
     }
 }
+
+
+//Pie Charts
+
+[data-pie-id]>*:nth-child(7n+1), [data-bar-id]>*:nth-child(7n+1), [data-line-id]>*:nth-child(7n+1){
+    color: darkgrey!important;
+}
+[data-pie-id]>*:nth-child(7n+2), [data-bar-id]>*:nth-child(7n+2), [data-line-id]>*:nth-child(7n+2) {
+    color: lightgrey!important;
+}
+[data-pie-id]>*:nth-child(7n+3), [data-bar-id]>*:nth-child(7n+3), [data-line-id]>*:nth-child(7n+3) {
+    color: grey!important;
+}

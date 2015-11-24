@@ -35,7 +35,7 @@ if ( !empty($gearitems) ):
 <?php
 $output .='<div class="sublistcontainer"><table style="width: 100%;">';
 		
-	$output .= "<tr><th>#</th><th>Name</th><th>Hersteller</th><th></th><th>Kategorie</th><th>Umpacken</th><th>Gewicht</th><th>Gesamt</th><th></th></tr>";
+	$output .= "<tr><th>#</th><th>Name</th><th>Hersteller</th><th class='hide-for-print'></th><th>Kategorie</th><th class='hide-for-print'>Umpacken</th><th>Gewicht</th><th>Gesamt</th><th></th></tr>";
 
 	$bodyWeight = 0; $consumerGoodsWeight = 0; $equipmentWeight = $gesamtgewicht;
 
@@ -62,7 +62,7 @@ $output .='<div class="sublistcontainer"><table style="width: 100%;">';
 				$equipmentWeight = $equipmentWeight + $itemWeightSubtotal;
 			}
 
-		}
+		};
 
 
 		$row = '';
@@ -72,7 +72,7 @@ $output .='<div class="sublistcontainer"><table style="width: 100%;">';
 		$row .= '<td>' . $brand[0]->name . '</td>';
 		$row .= '<td class="hide-for-print" style="width:50px"><a href="' . $permalinkmain . '?increasegear=' . $value . '&increasegearsublist=' . $sublist . '"><i class="fa fa-plus"></i></a> <a href="' . $permalinkmain . '?reducegear=' . $value . '&reducegearsublist=' . $sublist . '"><i class="fa fa-minus"></i></a></td>'; // Geartype Name
 		$row .= '<td>' . $itemType[0]->name . '</td>'; // Geartype Name
-		$row .= '<td>'. drag_dropdown($post_ID, $value, $allsublists, $sublist, $permalinkmain, $itemCount) .'</td>';
+		$row .= '<td class="hide-for-print">'. drag_dropdown($post_ID, $value, $allsublists, $sublist, $permalinkmain, $itemCount) .'</td>';
 		$row .= '<td style="text-align:right">' . $itemWeight . 'g</td>'; // Item Weight
 		$row .= '<td style="text-align:right">' . $itemWeightSubtotal . 'g</td>'; // Item Weight Subtotal (Weight * Count)
 		$row .= '<td class="hide-for-print" style="width: 13px"><a href="' . $permalinkmain . '?removegear=' . $value . '&removegearsublist=' . $sublist . '">'; //Remove Item
@@ -89,9 +89,9 @@ $output .='<div class="sublistcontainer"><table style="width: 100%;">';
 	$output .=	'<td></td>';
 	$output .=	'<td><strong>Gesamt</strong></td>';
 	$output .=	'<td></td>';
-	$output .=	'<td></td>';
+	$output .=	'<td class="hide-for-print"></td>';
 	$output .=	'<td></td><!-- Platzhalter für "Verschieben" Button, den es in der Gesamt Zeile nicht gibt -->';
-	$output .=	'<td></td>';
+	$output .=	'<td class="hide-for-print"></td>';
 	$output .=	'<td></td>';
 	$output .=	'<td style="text-align:right"><strong>' . $gesamtgewicht . 'g</strong></td>';
 	$output .=	'<td class="hide-for-print"></td>';
