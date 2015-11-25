@@ -139,7 +139,7 @@ Loop
 
 
 <?php 
-	$usedBrands = array();
+	/*$usedBrands = array();
 	foreach( $posts as $post ): setup_postdata( $post );
 		$brands = wp_get_post_terms( get_the_ID(), 'brand');
 		//print_r($brands[0]);
@@ -156,6 +156,6 @@ Loop
 		
 
 	endforeach;
-
+*/
  ?>
 <?php get_footer(); ?>
