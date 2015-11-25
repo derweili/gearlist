@@ -4,7 +4,22 @@ Template Name: Gear-Overview
 */
 get_header();
 $permalinkmain = get_permalink();
+
+
+//Query My Posts
+global $post;  
+$the_query = array(
+	'posts_per_page'   => '9000',
+	'post_type'     => 'gear',
+	'suppress_filters' => false,
+	//'meta_key'=>'_thumbnail_id',
+	'author' => get_current_user_id()
+
+);
+$posts = get_posts( $the_query ); 
+
 ?>
+
 <div class="row">
 	<header class="columns small-12">
 		<h1><?php the_title(); ?></h1>
@@ -13,34 +28,8 @@ $permalinkmain = get_permalink();
 	<?php if (is_user_logged_in()): ?>
 	<?php /* Start loop */ ?>
 		<?php while ( have_posts() ) : the_post(); ?>
-		<div class="filter-section">
-			Filter:<br />
-
-			<dl class="tabs" data-tab>
-			  <dd class="active"><a href="#panel1">Kategorie</a></dd>
-			  <dd><a href="#panel2">Hersteller</a></dd>
-			</dl>
-			<div class="tabs-content">
-			  <div class="content active" id="panel1">
-			  	<span class="label filteritem" data-filter="singlegearitem">Alle</span>
-				<?php 
-					$geartype = get_terms( 'geartype', 'orderby=name&hide_empty=0' );
-						foreach ($geartype as $geartypesingle) {
-							echo '<span class="label filteritem ' . $geartypesingle->slug . '" data-filter="geartype-' . $geartypesingle->slug . '">' . $geartypesingle->name . '</span> ';
-					}
-				?>
-			  </div>
-			  <div class="content" id="panel2">
-			  	<span class="label filteritem" data-filter="singlegearitem">Alle</span>
-				<?php 
-					$geartype = get_terms( 'brand', 'orderby=name&hide_empty=0' );
-					foreach ($geartype as $geartypesingle) {
-						echo '<span class="label filteritem ' . $geartypesingle->slug . '" data-filter="brand-' . $geartypesingle->slug . '">' . $geartypesingle->name . '</span> ';
-					};
-				?>
-			  </div>
-			</div>
-		</div>
+		
+		<?php gearlist_filter($posts); ?>
 
 			<article <?php post_class() ?> id="post-<?php the_ID(); ?>">
 
@@ -49,16 +38,7 @@ $permalinkmain = get_permalink();
 				</div>
 				<div>
 					<?php 
-						global $post;  
-						$the_query = array(
-							'posts_per_page'   => '9000',
-							'post_type'     => 'gear',
-							'suppress_filters' => false,
-							//'meta_key'=>'_thumbnail_id',
-							'author' => get_current_user_id()
-
-						);
-						$posts = get_posts( $the_query );  
+						 
 						if(!empty($posts)):
 
 						foreach( $posts as $post ): setup_postdata( $post );

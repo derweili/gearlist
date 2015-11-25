@@ -2,12 +2,6 @@
 
 function gearlist_filter($posts = '') {
 
-
-if (empty($posts)) {
-	echo "Test";
-}else{
-	echo "Nicht leer";
-}
 //print_r($posts);
 
 	 ?>
