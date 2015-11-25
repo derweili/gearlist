@@ -4,6 +4,19 @@ Template Name: Gearpool
 */
 get_header();
 $permalinkmain = get_permalink();
+
+global $post;  
+$the_query = array(
+	'posts_per_page'   => '9000',
+	'post_type'     => 'gear',
+	'suppress_filters' => false,
+	'meta_key'=>'gearpool',
+	'meta_value' => true,
+	//'author' => get_current_user_id()
+
+);
+$posts = get_posts( $the_query );  
+
 ?>
 <div class="row">
 	<?php if (is_user_logged_in()): ?>
@@ -34,35 +47,9 @@ $permalinkmain = get_permalink();
 Filter
 ->
 
-	<div class="filter-section">
-		Filter:<br />
-
-		<dl class="tabs" data-tab>
-		  <dd class="active"><a href="#panel1">Kategorie</a></dd>
-		  <dd><a href="#panel2">Hersteller</a></dd>
-		</dl>
-		<div class="tabs-content">
-		  <div class="content active" id="panel1">
-		  	<span class="label filteritem" data-filter="singlegearitem">Alle</span>
-			<?php 
-				$geartype = get_terms( 'geartype', 'orderby=name&hide_empty=0' );
-					foreach ($geartype as $geartypesingle) {
-						echo '<span class="label filteritem ' . $geartypesingle->slug . '" data-filter="geartype-' . $geartypesingle->slug . '">' . $geartypesingle->name . '</span> ';
-				}
-			?>
-		  </div>
-		  <div class="content" id="panel2">
-		  	<span class="label filteritem" data-filter="singlegearitem">Alle</span>
-			<?php 
-				$geartype = get_terms( 'brand', 'orderby=name&hide_empty=0' );
-				foreach ($geartype as $geartypesingle) {
-					echo '<span class="label filteritem ' . $geartypesingle->slug . '" data-filter="brand-' . $geartypesingle->slug . '">' . $geartypesingle->name . '</span> ';
-				};
-			?>
-		  </div>
-		</div>
-	</div>
-
+<?php 
+	gearlist_filter($posts);
+?>
 
 
 <!-
@@ -75,17 +62,7 @@ Loop
 	<?php while ( have_posts() ) : the_post(); ?>
 			<div class="row" data-equalizer>
 				<?php 
-					global $post;  
-					$the_query = array(
-						'posts_per_page'   => '9000',
-						'post_type'     => 'gear',
-						'suppress_filters' => false,
-						'meta_key'=>'gearpool',
-						'meta_value' => true,
-						//'author' => get_current_user_id()
-
-					);
-					$posts = get_posts( $the_query );  
+					
 					if(!empty($posts)):
 
 
@@ -159,4 +136,26 @@ Loop
 		</div>
 	-->
 </div>
+
+
+<?php 
+	$usedBrands = array();
+	foreach( $posts as $post ): setup_postdata( $post );
+		$brands = wp_get_post_terms( get_the_ID(), 'brand');
+		//print_r($brands[0]);
+		//echo "<hr />";
+		if (isset($brands[0])) {
+			$brandslug = $brands[0]->slug;
+			if (in_array($brandslug, $usedBrands)) {
+				# code...
+			}else{
+				echo $brands[0]->name . "<br />";
+				$usedBrands[] = $brands[0]->slug;
+			};
+		}
+		
+
+	endforeach;
+
+ ?>
 <?php get_footer(); ?>

@@ -40,7 +40,7 @@ if (count($posts) > 0): ?>
 </div>
 <?php else: ?>
 <div class="row">
-	<div class="columns small-12"><a href="" class="button expand" data-reveal-id="addtomygear">zu eigenem Gear hinzufügen</a></div>
+	<div class="columns small-12"><a href="" class="button expand" data-reveal-id="addtomygear">zu meiner Ausrüstung hinzufügen</a></div>
 </div>
 <?php endif; ?>
 

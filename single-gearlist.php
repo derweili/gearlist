@@ -71,14 +71,14 @@ $current_user = wp_get_current_user()->ID;
 
 		</div>
 		
-		<div class="columns small-12">
+		<div class="columns small-12 hide-for-print">
 			<h3>Auswertung:</h3>
 		</div>
-		<div class="columns small-4">
+		<div class="columns small-4 hide-for-print">
 			<div id="my-cool-chart"></div>
 		</div>
-		<div class="columns small-5 end">
-			<ul data-pie-id="my-cool-chart" data-options='{"donut": "false", "donut_inner_ratio": 0, "show_percent": true}'>
+		<div class="columns small-5 end hide-for-print">
+			<ul data-pie-id="my-cool-chart" data-options='{"donut": false, "donut_inner_ratio": 0.5, "show_percent": true}'>
 			  <li data-value="<?php echo $bodyWeight; ?>">Gewicht am Körper: <?php echo $bodyWeight; ?>g</li>
 			  <li data-value="<?php echo $consumerGoodsWeight; ?>">Gepäck - Verbrauchsgüter: <?php echo $consumerGoodsWeight; ?>g</li>
 			  <li data-value="<?php echo $equipmentWeight; ?>">Gepäck - Ausrüstung: <?php echo $equipmentWeight; ?>g</li>

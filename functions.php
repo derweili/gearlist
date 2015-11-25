@@ -83,6 +83,10 @@ require_once( 'library/gearlist-basic-functions.php' );
 require_once( 'library/gear-accordion.php' );
 
 
+/** Filter */
+require_once( 'library/filter.php' );
+
+
 /** importer */
 require_once( 'library/importer.php' );
 
