@@ -88,7 +88,7 @@ array_multisort($name, SORT_ASC, $usedBrands);
 
 
 foreach ($usedBrands as $key => $value) {
-	echo '<span class="label filteritem" data-filter="' . $value['slug'] . '">';
+	echo '<span class="label filteritem" data-filter="brand-' . $value['slug'] . '">';
 	echo $value['name'];
 	echo "</span> ";
 }
