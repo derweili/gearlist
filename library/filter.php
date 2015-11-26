@@ -66,7 +66,7 @@ function gearlist_filter($posts = '') {
 			}else{
 				//echo $brands[0]->name . "<br />";
 				//echo '<span class="label filteritem" data-filter="brand-' . $brandslug . '">' . $brands[0]->name . '</span> ';
-				$brandinfo = array('slug' => $brands[0]->slug, 'name' => $brands[0]->slug );
+				$brandinfo = array('slug' => $brands[0]->slug, 'name' => $brands[0]->name );
 				//$usedBrands[] = $brands[0]->slug;
 				$usedBrands[] = $brandinfo;
 				$usedBrandsSlug[] = $brands[0]->slug;
@@ -80,7 +80,7 @@ Array Sortieren
 */	
 foreach ($usedBrands as $nr => $inhalt)
 {
-    $slug[$nr]  = strtolower( $inhalt['slug'] );
+    //$slug[$nr]  = strtolower( $inhalt['slug'] );
     $name[$nr]   = strtolower( $inhalt['name'] );
     //$datum[$nr] = strtolower( $inhalt['Datum'] );
 }
