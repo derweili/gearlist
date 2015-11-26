@@ -173,7 +173,7 @@ function registerNewGearForm( $permalinkmain ){
 
 				$terms_args = array(
 				    'orderby'           => 'name', 
-				    'hide_empty'        => true,
+				    'hide_empty'        => false,
 				    'parent'            => '0'
 				); 
 				$geartype = get_terms( 'geartype', $terms_args );
