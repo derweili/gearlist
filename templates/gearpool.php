@@ -24,13 +24,13 @@ $posts = get_posts( $the_query );
 			<?php registerNewGearForm( $permalinkmain ); ?>
 
 
-			<div style="margin-top:20px">
+			<!--<div style="margin-top:20px">
 				<strong>Neuer Hersteller hinzufügen:</strong>
 				<form action="<?php $permalinkmain ?>" method="get">
 					<input type="text" name="newbrand" placeholder="Hersteller">
 					<button class="button" type="submit">Hinzufügen</button>
 				</form>
-			</div>
+			</div>-->
 		</div>
 	<?php endif; ?>
 
