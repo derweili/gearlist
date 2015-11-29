@@ -36,7 +36,7 @@ function gearlist_filter($posts = '') {
 					# code...
 				}else{
 					//echo $types[0]->name . "<br />";
-					echo '<span class="label filteritem" data-filter="brand-' . $brandslug . '">' . $types[0]->name . '</span> ';
+					echo '<span class="label filteritem" data-filter="geartype-' . $brandslug . '">' . $types[0]->name . '</span> ';
 					$usedTypes[] = $types[0]->slug;
 				};
 			}
